@@ -16,6 +16,7 @@
 		1FCDF308244DFC7D000363A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FCDF306244DFC7D000363A0 /* LaunchScreen.storyboard */; };
 		1FCDF310244E373B000363A0 /* TrendingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF30F244E373B000363A0 /* TrendingViewController.swift */; };
 		1FCDF312244E376C000363A0 /* BookmarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF311244E376C000363A0 /* BookmarksViewController.swift */; };
+		1FCDF315244F8843000363A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FCDF314244F8843000363A0 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		1FCDF309244DFC7D000363A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FCDF30F244E373B000363A0 /* TrendingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingViewController.swift; sourceTree = "<group>"; };
 		1FCDF311244E376C000363A0 /* BookmarksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksViewController.swift; sourceTree = "<group>"; };
+		1FCDF314244F8843000363A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FCDF315244F8843000363A0 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +51,7 @@
 			children = (
 				1FCDF2F8244DFC7C000363A0 /* ios-news-app */,
 				1FCDF2F7244DFC7C000363A0 /* Products */,
+				1FCDF313244F8843000363A0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +78,14 @@
 				1FCDF309244DFC7D000363A0 /* Info.plist */,
 			);
 			path = "ios-news-app";
+			sourceTree = "<group>";
+		};
+		1FCDF313244F8843000363A0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1FCDF314244F8843000363A0 /* CoreLocation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

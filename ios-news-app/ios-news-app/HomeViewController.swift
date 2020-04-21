@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
 class HomeViewController: UIViewController {
 
+    let locationManager = CLLocationManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
 
 
