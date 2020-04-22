@@ -27,22 +27,26 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vUJ-Id-e2o">
-                                <rect key="frame" x="20" y="187" width="374" height="109"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vUJ-Id-e2o" userLabel="Weather Information">
+                                <rect key="frame" x="20" y="193" width="374" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloudy_weather" translatesAutoresizingMaskIntoConstraints="NO" id="jiB-eK-qbP">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="109"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfg-zB-9Ab" userLabel="City Label">
                                         <rect key="frame" x="20" y="8" width="190" height="51"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrT-D4-HKM" userLabel="State Label">
                                         <rect key="frame" x="20" y="58" width="190" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -59,7 +63,8 @@
                     <connections>
                         <outlet property="cityLabel" destination="bfg-zB-9Ab" id="xLq-f0-eDB"/>
                         <outlet property="stateLabel" destination="mrT-D4-HKM" id="gB5-i9-8Qv"/>
-                        <outlet property="weatherBackgroundImage" destination="vUJ-Id-e2o" id="ydr-2C-w3r"/>
+                        <outlet property="weatherBackground" destination="jiB-eK-qbP" id="hQ5-OQ-BQA"/>
+                        <outlet property="weatherInformation" destination="vUJ-Id-e2o" id="j57-hf-XP1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -167,6 +172,7 @@
     </scenes>
     <resources>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>
+        <image name="cloudy_weather" width="852" height="480"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="rectangle.split.3x3.fill" catalog="system" width="128" height="93"/>
         <image name="trending-up" width="28" height="28"/>

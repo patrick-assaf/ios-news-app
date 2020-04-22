@@ -14,7 +14,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
-    @IBOutlet weak var weatherBackgroundImage: UIView!
+    @IBOutlet weak var weatherInformation: UIView!
+    @IBOutlet weak var weatherBackground: UIImageView!
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
@@ -38,7 +39,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
-        weatherBackgroundImage.layer.cornerRadius = 10;
+        weatherInformation.layoutIfNeeded()
+        weatherInformation.layer.cornerRadius = 10
+        weatherInformation.layer.masksToBounds = true
     }
 
 
