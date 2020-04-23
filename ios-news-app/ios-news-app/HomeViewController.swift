@@ -29,6 +29,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                     self.cityLabel.text = "\(city)"
                     self.stateLabel.text = "\(state)"
                 }
+                let weatherURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid=9031b6d8f8514c01eeaaf398a4188f8b")
             }
         })
     }
