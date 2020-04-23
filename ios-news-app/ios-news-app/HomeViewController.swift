@@ -9,7 +9,51 @@
 import UIKit
 import CoreLocation
 
+struct WeatherInfo:Decodable {
+    var temp: Int
+    var main: String
+}
+
+enum WeatherError:Error {
+    case noDataAvailable
+    case canNotProcessData
+}
+
+struct WeatherRequest {
+    let url: URL
+    let api_key = "9031b6d8f8514c01eeaaf398a4188f8b"
+    
+    init(city: String) {
+        let resourceURL = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(api_key)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let url = URL(string: resourceURL!)
+        self.url = url!
+    }
+    
+    func getWeather (completion: @escaping(Result<WeatherInfo, WeatherError>) -> Void) {
+        let dataTask = URLSession.shared.dataTask(with: url) { data, _, _ in
+            guard let jsonData = data else {
+                completion(.failure(.noDataAvailable))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let weatherInfo = try decoder.decode(WeatherInfo.self, from: jsonData)
+                let weatherDetails = weatherInfo
+                completion(.success(weatherDetails))
+            } catch {
+                completion(.failure(.canNotProcessData))
+                return
+            }
+            
+        }
+        dataTask.resume()
+    }
+}
+
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate {
+    
+    var weatherList = [WeatherInfo]()
 
     let locationManager = CLLocationManager()
     @IBOutlet weak var cityLabel: UILabel!
@@ -30,8 +74,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     self.cityLabel.text = "\(city)"
                     self.stateLabel.text = "\(state)"
                 }
-                let weatherURL = URL(string: "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid=9031b6d8f8514c01eeaaf398a4188f8b")!
                 
+                let weatherRequest = WeatherRequest(city: city)
+                weatherRequest.getWeather { [weak self] result in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success(let weather):
+                        self?.weatherList[0] = weather
+                    }
+                }
             }
         })
     }
