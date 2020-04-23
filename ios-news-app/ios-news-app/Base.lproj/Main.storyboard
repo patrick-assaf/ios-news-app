@@ -62,6 +62,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="cityLabel" destination="bfg-zB-9Ab" id="xLq-f0-eDB"/>
+                        <outlet property="searchBar" destination="Z1E-ue-a3B" id="Tc1-Ne-dUd"/>
                         <outlet property="stateLabel" destination="mrT-D4-HKM" id="gB5-i9-8Qv"/>
                         <outlet property="weatherBackground" destination="jiB-eK-qbP" id="hQ5-OQ-BQA"/>
                         <outlet property="weatherInformation" destination="vUJ-Id-e2o" id="j57-hf-XP1"/>
