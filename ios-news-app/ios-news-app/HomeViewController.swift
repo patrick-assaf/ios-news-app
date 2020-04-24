@@ -32,6 +32,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     self.stateLabel.text = "\(state)"
                 }
                 
+                let weatherAPIKey = "9031b6d8f8514c01eeaaf398a4188f8b"
+                let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(weatherAPIKey)"
+                let requestURL = weatherURL.replacingOccurrences(of: " ", with: "%20")
+                AF.request(requestURL).response { response in
+                    print(response)
+                }
+                
             }
         })
     }
