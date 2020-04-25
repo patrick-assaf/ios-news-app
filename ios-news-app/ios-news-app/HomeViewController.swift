@@ -109,8 +109,21 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     override func viewWillAppear(_ animated: Bool) {
         homeArticlesTable.reloadData()
+        
+        let guardianURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/guardian-home"
+        AF.request(guardianURL).responseJSON { response in
+            switch response.result {
+            case let .success(value):
+                let guardianJSON: JSON = JSON(value)
+                print(guardianJSON)
+                
+            case let .failure(error):
+                print(error)
+            }
+        }
+        
         if homeArticles.count == 0 {
-            homeArticles.append(Article(id: "0", title: "Dummy Article", date: "Today", section: "Testing", imageURL: "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png"))
+            homeArticles.append(Article(key: "", id: "0", title: "Dummy Article", date: "Today", section: "Testing", imageURL: "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png", description: ""))
         }
         super.viewWillAppear(animated)
     }
