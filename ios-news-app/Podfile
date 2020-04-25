@@ -7,4 +7,5 @@ target 'ios-news-app' do
 
   # Pods for ios-news-app
   pod 'Alamofire', '~> 5.1'
+  pod 'SwiftyJSON', '~> 4.0'
 end

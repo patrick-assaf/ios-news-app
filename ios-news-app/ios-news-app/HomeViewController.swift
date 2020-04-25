@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import Alamofire
+import SwiftyJSON
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate {
 
@@ -27,16 +28,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 let placemark = placemarks?.first
                 let city = placemark?.locality ?? ""
                 let state = placemark?.administrativeArea ?? ""
-                DispatchQueue.main.async {
-                    self.cityLabel.text = "\(city)"
-                    self.stateLabel.text = "\(state)"
-                }
                 
                 let weatherAPIKey = "9031b6d8f8514c01eeaaf398a4188f8b"
                 let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(weatherAPIKey)"
                 let requestURL = weatherURL.replacingOccurrences(of: " ", with: "%20")
-                AF.request(requestURL).response { response in
-                    print(response)
+                AF.request(requestURL).responseJSON { response in
+                    switch response.result {
+                    case let .success(value):
+                        let weatherJSON: JSON = JSON(value)
+                        print(weatherJSON["weather"][0]["main"])
+                        print(weatherJSON["main"]["temp"])
+                    case let .failure(error):
+                        print(error)
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    self.cityLabel.text = "\(city)"
+                    self.stateLabel.text = "\(state)"
                 }
                 
             }
