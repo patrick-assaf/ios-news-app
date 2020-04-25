@@ -70,19 +70,19 @@
                                     <accessibilityTraits key="traits" image="YES"/>
                                 </accessibility>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p6B-hq-zdG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p6B-hq-zdG">
                                 <rect key="frame" x="20" y="310" width="374" height="503"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="121" id="8a1-EN-gxY" customClass="HomeArticlesTableViewCell" customModule="ios_news_app" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="374" height="121"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="articleCell" rowHeight="120" id="8a1-EN-gxY" customClass="HomeArticlesTableViewCell" customModule="ios_news_app" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="374" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8a1-EN-gxY" id="xIf-oT-x4F">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="121"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8a1-EN-gxY" id="xIf-oT-x4F" userLabel="Article View">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0vx-ng-jOD" userLabel="Article Image">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0vx-ng-jOD" userLabel="Article Image">
                                                     <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -96,18 +96,19 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNy-eA-byj" userLabel="Article Date">
                                                     <rect key="frame" x="128" y="89" width="84" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0DR-id-cZ5" userLabel="Article Section">
                                                     <rect key="frame" x="220" y="89" width="134" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" name="unemphasizedSelectedTextBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="articleDate" destination="hNy-eA-byj" id="rjY-ws-eF0"/>
@@ -117,6 +118,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="9pv-A4-QxB" id="TnJ-x5-xqe"/>
+                                    <outlet property="delegate" destination="9pv-A4-QxB" id="YZK-Fe-vRM"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -125,6 +130,7 @@
                     <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="cityLabel" destination="bfg-zB-9Ab" id="xLq-f0-eDB"/>
+                        <outlet property="homeArticlesTable" destination="p6B-hq-zdG" id="vgk-Q2-T9T"/>
                         <outlet property="searchBar" destination="Z1E-ue-a3B" id="Tc1-Ne-dUd"/>
                         <outlet property="stateLabel" destination="mrT-D4-HKM" id="gB5-i9-8Qv"/>
                         <outlet property="summaryLabel" destination="lMV-l9-RND" id="7YX-4g-qir"/>

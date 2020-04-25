@@ -11,7 +11,7 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate {
+class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
     var homeArticles: [Article] = []
 
@@ -22,6 +22,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var weatherInformation: UIView!
     @IBOutlet weak var weatherBackground: UIImageView!
+    @IBOutlet weak var homeArticlesTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -73,6 +74,45 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 
             }
         })
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return homeArticles.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! HomeArticlesTableViewCell
+        
+        let index: Int = indexPath.row
+        
+        articleCell.articleTitle?.text = homeArticles[index].title
+        articleCell.articleDate?.text = homeArticles[index].date
+        articleCell.articleSection?.text = homeArticles[index].section
+        displayArticleImage(index, articleCell: articleCell)
+        
+        return articleCell
+    }
+    
+    func displayArticleImage(_ row: Int, articleCell: HomeArticlesTableViewCell) {
+        let url: String = (URL(string: homeArticles[row].imageURL)?.absoluteString)!
+        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, response, error) -> Void in
+            if error != nil {
+                print(error!)
+                return
+            }
+            DispatchQueue.main.async(execute: {
+                let image = UIImage(data: data!)
+                articleCell.articleImage?.image = image
+            })
+        }).resume()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        homeArticlesTable.reloadData()
+        if homeArticles.count == 0 {
+            homeArticles.append(Article(id: "0", title: "Dummy Article", date: "Today", section: "Testing", imageURL: "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png"))
+        }
+        super.viewWillAppear(animated)
     }
     
     override func viewDidLoad() {
