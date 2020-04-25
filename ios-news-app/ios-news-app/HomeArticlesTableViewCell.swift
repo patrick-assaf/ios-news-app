@@ -13,17 +13,18 @@ class HomeArticlesTableViewCell: UITableViewCell {
     @IBOutlet weak var articleView: UIView! {
         didSet {
             articleView.layer.cornerRadius = 10
-            articleView.layer.shadowOpacity = 1
-            articleView.layer.shadowRadius = 2
-            articleView.layer.shadowColor = UIColor(named: "Orange")?.cgColor
-            articleView.layer.shadowOffset = CGSize(width: 3, height: 3)
-            articleView.backgroundColor = UIColor(named: "Red")
+            articleView.layer.borderWidth = 1
+            articleView.layer.borderColor = UIColor(red:160/255, green:160/255, blue:175/255, alpha: 1).cgColor
         }
     }
     
     @IBOutlet weak var articleContainer: UIView!
     
-    @IBOutlet weak var articleImage: UIImageView!
+    @IBOutlet weak var articleImage: UIImageView! {
+        didSet{
+            articleImage.layer.cornerRadius = 10
+        }
+    }
     @IBOutlet weak var articleTitle: UILabel!
     @IBOutlet weak var articleDate: UILabel!
     @IBOutlet weak var articleSection: UILabel!
