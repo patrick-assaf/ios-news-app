@@ -31,19 +31,34 @@
                                 <rect key="frame" x="20" y="193" width="374" height="109"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloudy_weather" translatesAutoresizingMaskIntoConstraints="NO" id="jiB-eK-qbP">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jiB-eK-qbP">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="109"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="City" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfg-zB-9Ab" userLabel="City Label">
-                                        <rect key="frame" x="20" y="8" width="190" height="51"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfg-zB-9Ab" userLabel="City Label">
+                                        <rect key="frame" x="21" y="8" width="161" height="51"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="State" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrT-D4-HKM" userLabel="State Label">
-                                        <rect key="frame" x="20" y="58" width="190" height="43"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mrT-D4-HKM" userLabel="State Label">
+                                        <rect key="frame" x="21" y="58" width="161" height="43"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SnR-C8-Sw8">
+                                        <rect key="frame" x="190" y="9" width="160" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-l9-RND">
+                                        <rect key="frame" x="190" y="58" width="160" height="43"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -64,6 +79,8 @@
                         <outlet property="cityLabel" destination="bfg-zB-9Ab" id="xLq-f0-eDB"/>
                         <outlet property="searchBar" destination="Z1E-ue-a3B" id="Tc1-Ne-dUd"/>
                         <outlet property="stateLabel" destination="mrT-D4-HKM" id="gB5-i9-8Qv"/>
+                        <outlet property="summaryLabel" destination="lMV-l9-RND" id="7YX-4g-qir"/>
+                        <outlet property="temperatureLabel" destination="SnR-C8-Sw8" id="E48-M2-uI7"/>
                         <outlet property="weatherBackground" destination="jiB-eK-qbP" id="hQ5-OQ-BQA"/>
                         <outlet property="weatherInformation" destination="vUJ-Id-e2o" id="j57-hf-XP1"/>
                     </connections>
@@ -173,7 +190,6 @@
     </scenes>
     <resources>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>
-        <image name="cloudy_weather" width="852" height="480"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="rectangle.split.3x3.fill" catalog="system" width="128" height="93"/>
         <image name="trending-up" width="28" height="28"/>

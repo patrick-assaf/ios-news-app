@@ -16,6 +16,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     let locationManager = CLLocationManager()
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
     @IBOutlet weak var weatherInformation: UIView!
     @IBOutlet weak var weatherBackground: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -28,6 +30,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                 let placemark = placemarks?.first
                 let city = placemark?.locality ?? ""
                 let state = placemark?.administrativeArea ?? ""
+                var temperature: Int = 0
+                var summary: String = ""
                 
                 let weatherAPIKey = "9031b6d8f8514c01eeaaf398a4188f8b"
                 let weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=\(city)&units=metric&appid=\(weatherAPIKey)"
@@ -36,8 +40,25 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     switch response.result {
                     case let .success(value):
                         let weatherJSON: JSON = JSON(value)
-                        print(weatherJSON["weather"][0]["main"])
-                        print(weatherJSON["main"]["temp"])
+                        summary = weatherJSON["weather"][0]["main"].stringValue
+                        temperature = Int(weatherJSON["main"]["temp"].doubleValue)
+                        self.temperatureLabel.text = "\(temperature)°C"
+                        self.summaryLabel.text = "\(summary)"
+                        
+                        switch summary {
+                        case "Clouds":
+                            self.weatherBackground.image = UIImage(named: "cloudy_weather")
+                        case "Clear":
+                            self.weatherBackground.image = UIImage(named: "clear_weather")
+                        case "Snow":
+                            self.weatherBackground.image = UIImage(named: "snowy_weather")
+                        case "Rain":
+                            self.weatherBackground.image = UIImage(named: "rainy_weather")
+                        case "Thunderstorm":
+                            self.weatherBackground.image = UIImage(named: "thunder_weather")
+                        default:
+                            self.weatherBackground.image = UIImage(named: "sunny_weather")
+                        }
                     case let .failure(error):
                         print(error)
                     }
