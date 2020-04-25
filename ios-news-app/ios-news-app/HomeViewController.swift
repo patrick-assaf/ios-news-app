@@ -12,6 +12,8 @@ import Alamofire
 import SwiftyJSON
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate {
+    
+    var homeArticles: [Article] = []
 
     let locationManager = CLLocationManager()
     @IBOutlet weak var cityLabel: UILabel!
