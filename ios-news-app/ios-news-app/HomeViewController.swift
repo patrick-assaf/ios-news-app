@@ -87,24 +87,30 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         
         articleCell.articleTitle?.text = homeArticles[index].title
         articleCell.articleDate?.text = homeArticles[index].date
-        articleCell.articleSection?.text = homeArticles[index].section
+        articleCell.articleSection?.text = "| " + homeArticles[index].section
         displayArticleImage(index, articleCell: articleCell)
         
         return articleCell
     }
     
     func displayArticleImage(_ row: Int, articleCell: HomeArticlesTableViewCell) {
-        let url: String = (URL(string: homeArticles[row].imageURL)?.absoluteString)!
-        URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, response, error) -> Void in
-            if error != nil {
-                print(error!)
-                return
-            }
-            DispatchQueue.main.async(execute: {
-                let image = UIImage(data: data!)
-                articleCell.articleImage?.image = image
-            })
-        }).resume()
+        if(homeArticles[row].imageURL != "undefined") {
+            let url: String = (URL(string: homeArticles[row].imageURL)?.absoluteString)!
+            URLSession.shared.dataTask(with: URL(string: url)!, completionHandler: { (data, response, error) -> Void in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                DispatchQueue.main.async(execute: {
+                    let image = UIImage(data: data!)
+                    articleCell.articleImage?.image = image
+                })
+            }).resume()
+        }
+        else {
+            let image = UIImage(named: "default-guardian")
+            articleCell.articleImage?.image = image
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
