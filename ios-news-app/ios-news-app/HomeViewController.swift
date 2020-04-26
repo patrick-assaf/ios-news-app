@@ -108,7 +108,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        homeArticlesTable.reloadData()
         
         let guardianURL = "http://localhost:5000/guardian-home"
         AF.request(guardianURL).responseJSON { response in
@@ -123,6 +122,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     let img: String = article["img"].string!
                     self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section, imageURL: img, description: ""))
                 }
+                self.homeArticlesTable.reloadData()
                 
             case let .failure(error):
                 print(error)
