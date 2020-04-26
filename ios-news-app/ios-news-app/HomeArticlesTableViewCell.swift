@@ -10,15 +10,15 @@ import UIKit
 
 class HomeArticlesTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var articleView: UIView! {
+    @IBOutlet weak var articleView: UIView!
+    
+    @IBOutlet weak var articleContainer: UIView! {
         didSet {
-            articleView.layer.cornerRadius = 10
-            articleView.layer.borderWidth = 1
-            articleView.layer.borderColor = UIColor(red:160/255, green:160/255, blue:175/255, alpha: 1).cgColor
+            articleContainer.layer.cornerRadius = 10
+            articleContainer.layer.borderWidth = 1
+            articleContainer.layer.borderColor = UIColor(red:160/255, green:160/255, blue:175/255, alpha: 1).cgColor
         }
     }
-    
-    @IBOutlet weak var articleContainer: UIView!
     
     @IBOutlet weak var articleImage: UIImageView! {
         didSet{

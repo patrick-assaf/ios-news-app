@@ -119,6 +119,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):
+                self.homeArticles.removeAll()
                 let guardianJSON: JSON = JSON(value)
                 for (key, article) in guardianJSON {
                     let id: String = article["id"].string!
@@ -129,7 +130,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section, imageURL: img, description: ""))
                 }
                 self.homeArticlesTable.reloadData()
-                
             case let .failure(error):
                 print(error)
             }
