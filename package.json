@@ -1,0 +1,34 @@
+{
+    "name": "react-news-app",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "axios": "^0.19.2",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "lodash": "^4.17.15",
+        "node-fetch": "^2.6.0"
+    },
+    "scripts": {
+        "server": "nodemon server.js",
+        "start": "npm run server"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.2"
+    }
+}
