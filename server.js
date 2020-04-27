@@ -12,7 +12,27 @@ function isvalid(value) {
 }
 
 function dateFormat(date) {
-    return date.slice(0, date.search("T"));
+    let today = new Date();
+
+    let timeHours = today.getUTCHours();
+    let timeMinutes = today.getUTCMinutes();
+    let timeSeconds = today.getUTCSeconds();
+
+    let articleTime = date.slice(date.search("T")+1, date.search("Z"));
+    let articleHours = articleTime.slice(0, articleTime.search(":"));
+    let articleTimeCut = articleTime.slice(articleTime.search(":")+1);
+    let articleMinutes = articleTimeCut.slice(0, articleTimeCut.search(":"));
+    let articleSeconds = articleTimeCut.slice(articleTimeCut.search(":")+1);
+
+    if(timeHours-articleHours > 0) {
+        return `${timeHours-articleHours}h ago`;
+    }
+    else if(timeMinutes-articleMinutes > 0) {
+        return `${timeMinutes-articleMinutes}m ago`;
+    }
+    else {
+        return `${timeSeconds-articleSeconds}s ago`;
+    }
 }
 
 function getImage(multimedia) {
@@ -72,7 +92,7 @@ app.get('/:path', (req, res) => {
                 id: `${article.id}`,
                 img: `${article.fields.thumbnail}`,
                 title: `${article.webTitle}`,
-                date: `${article.webPublicationDate}`,
+                date: `${dateFormat(article.webPublicationDate)}`,
                 section: `${article.sectionName}`,
                 url: `${article.webUrl}`
             }})
