@@ -135,7 +135,7 @@ app.get('/:path', (req, res) => {
                     id: `${data.response.content.id}`,
                     img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
                     `${data.response.content.blocks.main.elements[0].assets[data.response.content.blocks.main.elements[0].assets.length-1].file}`
-                    : undefined,
+                    : "undefined",
                     title: `${data.response.content.webTitle}`,
                     description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
                     date: `${getDate(data.response.content.webPublicationDate)}`,
