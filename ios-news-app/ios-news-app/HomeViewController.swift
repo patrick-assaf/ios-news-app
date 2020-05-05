@@ -14,6 +14,7 @@ import SwiftyJSON
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var homeArticles: [Article] = []
+    var articleID: String = ""
     var refreshControl = UIRefreshControl()
 
     let locationManager = CLLocationManager()
@@ -113,8 +114,16 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = homeArticlesTable.cellForRow(at: indexPath as IndexPath)
         homeArticlesTable.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        let index: Int = indexPath.row
+        self.articleID = homeArticles[index].id
 
         performSegue(withIdentifier: "detailedArticleSegue", sender: cell)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! DetailedArticleViewController
+        vc.articleID = self.articleID
     }
     
     func displayArticleImage(_ row: Int, articleCell: HomeArticlesTableViewCell) {

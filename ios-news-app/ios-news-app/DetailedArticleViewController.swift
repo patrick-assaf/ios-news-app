@@ -9,11 +9,14 @@
 import UIKit
 
 class DetailedArticleViewController: UIViewController {
-
+    
+    var articleID: String = ""
+    @IBOutlet weak var LabelArticleID: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        LabelArticleID.text = articleID
+        
     }
     
 
