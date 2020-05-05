@@ -94,6 +94,22 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         return articleCell
     }
     
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        
+        let index: Int = indexPath.row
+
+        let share = UIAction(title: "Share with Twitter", image: UIImage(named: "twitter")) {_ in
+            print("sharing" + self.homeArticles[index].id)
+        }
+        let bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) {_ in
+            print("bookmarking" + self.homeArticles[index].id)
+        }
+
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            UIMenu(title: "Menu", children: [share, bookmark])
+        }
+    }
+    
     func displayArticleImage(_ row: Int, articleCell: HomeArticlesTableViewCell) {
         if(homeArticles[row].imageURL != "undefined") {
             let url: String = (URL(string: homeArticles[row].imageURL)?.absoluteString)!
