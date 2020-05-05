@@ -19,11 +19,15 @@ class DetailedArticleViewController: UIViewController {
     @IBOutlet weak var sectionView: UILabel!
     @IBOutlet weak var dateView: UILabel!
     @IBOutlet weak var descriptionView: UILabel!
+    @IBOutlet weak var viewButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+    }
+    
+    @IBAction func openArticleURL(_ sender: Any) {
+       UIApplication.shared.open(URL(string: "\(articleURL)")!)
     }
     
     override func viewWillAppear(_ animated: Bool) {

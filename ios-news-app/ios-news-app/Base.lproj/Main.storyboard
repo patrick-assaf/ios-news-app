@@ -196,6 +196,9 @@
                                                 <rect key="frame" x="137.5" y="980" width="139" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="View Full Article"/>
+                                                <connections>
+                                                    <action selector="openArticleURL:" destination="ElO-Z5-WWn" eventType="touchUpInside" id="HRe-dm-5PF"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hKR-KU-jqf">
                                                 <rect key="frame" x="243" y="383" width="128" height="40"/>
@@ -255,6 +258,7 @@
                         <outlet property="imageView" destination="wVc-ou-K0h" id="M4O-bp-Thi"/>
                         <outlet property="sectionView" destination="DcP-6L-bBN" id="JjB-kS-2Un"/>
                         <outlet property="titleView" destination="ftv-uZ-jVI" id="eQV-Vn-0HQ"/>
+                        <outlet property="viewButton" destination="t0p-IR-BS1" id="b93-Lj-JD6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnN-21-0fv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
