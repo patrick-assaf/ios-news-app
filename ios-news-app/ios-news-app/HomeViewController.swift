@@ -14,6 +14,7 @@ import SwiftyJSON
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var homeArticles: [Article] = []
+    var refreshControl = UIRefreshControl()
 
     let locationManager = CLLocationManager()
     @IBOutlet weak var cityLabel: UILabel!
@@ -138,6 +139,29 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         super.viewWillAppear(animated)
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        let guardianURL = "http://localhost:5000/guardian-home"
+        AF.request(guardianURL).responseJSON { response in
+            switch response.result {
+            case let .success(value):
+                self.homeArticles.removeAll()
+                let guardianJSON: JSON = JSON(value)
+                for (key, article) in guardianJSON {
+                    let id: String = article["id"].string!
+                    let title: String = article["title"].string!
+                    let date: String = article["date"].string!
+                    let section: String = article["section"].string!
+                    let img: String = article["img"].string!
+                    self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section,  imageURL: img, description: ""))
+                }
+                self.homeArticlesTable.reloadData()
+                self.refreshControl.endRefreshing()
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -148,7 +172,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         weatherInformation.layoutIfNeeded()
         weatherInformation.layer.cornerRadius = 10
         weatherInformation.layer.masksToBounds = true
+        refreshControl.attributedTitle = NSAttributedString()
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        homeArticlesTable.addSubview(refreshControl)
+        
     }
 
-
+    
+    
 }

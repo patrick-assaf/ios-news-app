@@ -24,13 +24,17 @@ function dateFormat(date) {
     let articleMinutes = articleTimeCut.slice(0, articleTimeCut.search(":"));
     let articleSeconds = articleTimeCut.slice(articleTimeCut.search(":")+1);
 
+    if(timeHours < articleHours) {
+        timeHours = timeHours+24;
+    }
+
     if(timeHours-articleHours > 0) {
         return `${timeHours-articleHours}h ago`;
     }
     else if(timeMinutes-articleMinutes > 0) {
         return `${timeMinutes-articleMinutes}m ago`;
     }
-    else {
+    else if(timeSeconds-articleSeconds > 0){
         return `${timeSeconds-articleSeconds}s ago`;
     }
 }
