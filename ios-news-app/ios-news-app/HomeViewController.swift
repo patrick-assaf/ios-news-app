@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import Alamofire
 import SwiftyJSON
+import SwiftSpinner
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
@@ -204,6 +205,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SwiftSpinner.show(duration: 3.0, title:"Loading Home Page...")
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
