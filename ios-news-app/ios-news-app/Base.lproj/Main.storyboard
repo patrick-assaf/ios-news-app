@@ -250,14 +250,29 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Sfh-Fu-ESN"/>
                     </view>
-                    <navigationItem key="navigationItem" id="zt9-jT-Gkb"/>
+                    <navigationItem key="navigationItem" id="zt9-jT-Gkb">
+                        <rightBarButtonItems>
+                            <barButtonItem title="twitter" image="twitter" id="nKd-j7-tpP">
+                                <connections>
+                                    <action selector="shareOnTwitter:" destination="ElO-Z5-WWn" id="YnR-1N-N5I"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="bookmark" image="bookmark" catalog="system" id="WgJ-Wv-uk3">
+                                <connections>
+                                    <action selector="bookmarkArticle:" destination="ElO-Z5-WWn" id="0M6-Vm-8uZ"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <size key="freeformSize" width="414" height="1200"/>
                     <connections>
+                        <outlet property="bookmarkButton" destination="WgJ-Wv-uk3" id="BgM-97-l0d"/>
                         <outlet property="dateView" destination="hKR-KU-jqf" id="GPt-fP-cjU"/>
                         <outlet property="descriptionView" destination="zMJ-gu-Nyb" id="cgN-ui-2ST"/>
                         <outlet property="imageView" destination="wVc-ou-K0h" id="M4O-bp-Thi"/>
                         <outlet property="sectionView" destination="DcP-6L-bBN" id="JjB-kS-2Un"/>
                         <outlet property="titleView" destination="ftv-uZ-jVI" id="eQV-Vn-0HQ"/>
+                        <outlet property="twitterButton" destination="nKd-j7-tpP" id="1PW-QL-5ZB"/>
                         <outlet property="viewButton" destination="t0p-IR-BS1" id="b93-Lj-JD6"/>
                     </connections>
                 </viewController>
@@ -384,9 +399,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="rectangle.split.3x3.fill" catalog="system" width="128" height="93"/>
         <image name="trending-up" width="28" height="28"/>
+        <image name="twitter" width="24" height="24"/>
     </resources>
 </document>
