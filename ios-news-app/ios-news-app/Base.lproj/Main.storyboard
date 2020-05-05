@@ -145,22 +145,24 @@
                         <outlet property="temperatureLabel" destination="SnR-C8-Sw8" id="E48-M2-uI7"/>
                         <outlet property="weatherBackground" destination="jiB-eK-qbP" id="hQ5-OQ-BQA"/>
                         <outlet property="weatherInformation" destination="vUJ-Id-e2o" id="j57-hf-XP1"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="2Ws-Wq-QM4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="221.73913043478262" y="314.73214285714283"/>
         </scene>
-        <!--View Controller-->
+        <!--Detailed Article View Controller-->
         <scene sceneID="kfl-Km-grB">
             <objects>
-                <viewController id="ElO-Z5-WWn" sceneMemberID="viewController">
+                <viewController id="ElO-Z5-WWn" customClass="DetailedArticleViewController" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vtc-ol-eq1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Sfh-Fu-ESN"/>
                     </view>
+                    <navigationItem key="navigationItem" id="zt9-jT-Gkb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnN-21-0fv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

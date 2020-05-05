@@ -19,6 +19,7 @@
 		1FCDF315244F8843000363A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FCDF314244F8843000363A0 /* CoreLocation.framework */; };
 		1FCDF31724548404000363A0 /* HomeArticlesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF31624548404000363A0 /* HomeArticlesTableViewCell.swift */; };
 		1FCDF31924548642000363A0 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF31824548642000363A0 /* Article.swift */; };
+		1FCDF31D2461BE88000363A0 /* DetailedArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF31C2461BE88000363A0 /* DetailedArticleViewController.swift */; };
 		F80205A23EB12A43B1402993 /* Pods_ios_news_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D7688AF09601D494960AF5 /* Pods_ios_news_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		1FCDF314244F8843000363A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		1FCDF31624548404000363A0 /* HomeArticlesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeArticlesTableViewCell.swift; sourceTree = "<group>"; };
 		1FCDF31824548642000363A0 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		1FCDF31C2461BE88000363A0 /* DetailedArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedArticleViewController.swift; sourceTree = "<group>"; };
 		3FC2E7D28149BACDBB7B1FE8 /* Pods-ios-news-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-news-app.release.xcconfig"; path = "Target Support Files/Pods-ios-news-app/Pods-ios-news-app.release.xcconfig"; sourceTree = "<group>"; };
 		4F5C3845E5D781192283C99B /* Pods-ios-news-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-news-app.debug.xcconfig"; path = "Target Support Files/Pods-ios-news-app/Pods-ios-news-app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +82,7 @@
 				1FCDF2FD244DFC7C000363A0 /* HomeViewController.swift */,
 				1FCDF31624548404000363A0 /* HomeArticlesTableViewCell.swift */,
 				1FCDF31824548642000363A0 /* Article.swift */,
+				1FCDF31C2461BE88000363A0 /* DetailedArticleViewController.swift */,
 				1FCDF2FF244DFC7C000363A0 /* HeadlinesViewController.swift */,
 				1FCDF30F244E373B000363A0 /* TrendingViewController.swift */,
 				1FCDF311244E376C000363A0 /* BookmarksViewController.swift */,
@@ -226,6 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FCDF312244E376C000363A0 /* BookmarksViewController.swift in Sources */,
+				1FCDF31D2461BE88000363A0 /* DetailedArticleViewController.swift in Sources */,
 				1FCDF300244DFC7C000363A0 /* HeadlinesViewController.swift in Sources */,
 				1FCDF2FE244DFC7C000363A0 /* HomeViewController.swift in Sources */,
 				1FCDF31724548404000363A0 /* HomeArticlesTableViewCell.swift in Sources */,

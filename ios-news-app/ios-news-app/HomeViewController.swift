@@ -110,6 +110,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = homeArticlesTable.cellForRow(at: indexPath as IndexPath)
+        homeArticlesTable.deselectRow(at: indexPath as IndexPath, animated: true)
+
+        performSegue(withIdentifier: "detailedArticleSegue", sender: cell)
+    }
+    
     func displayArticleImage(_ row: Int, articleCell: HomeArticlesTableViewCell) {
         if(homeArticles[row].imageURL != "undefined") {
             let url: String = (URL(string: homeArticles[row].imageURL)?.absoluteString)!
