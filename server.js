@@ -7,8 +7,35 @@ app.use(cors());
 
 const port = process.env.PORT || 5000;
 
+const months = {
+    "01": "Jan",
+    "02": "Feb",
+    "03": "Mar",
+    "04": "Apr",
+    "05": "May",
+    "06": "Jun",
+    "07": "July",
+    "08": "Aug",
+    "09": "Sep",
+    "10": "Oct",
+    "11": "Nov",
+    "12": "Dec"
+}
+
 function isvalid(value) {
     return (value !== null && value !== '' && value !== undefined);
+}
+
+function getDate(date) {
+    let rawDate = date.slice(0, date.search("T"));
+    let year = rawDate.slice(0, rawDate.search("-"));
+    let dateCut = rawDate.slice(rawDate.search("-")+1);
+    let month = dateCut.slice(0, dateCut.search("-"));
+    let day = dateCut.slice(dateCut.search("-")+1);
+
+    month = months[month];
+
+    return day + " " + month + " " + year;
 }
 
 function dateFormat(date) {
@@ -37,15 +64,6 @@ function dateFormat(date) {
     else if(timeSeconds-articleSeconds > 0){
         return `${timeSeconds-articleSeconds}s ago`;
     }
-}
-
-function getImage(multimedia) {
-    for(const image in multimedia) {
-        if(multimedia[image].width >= 2000) {
-            return multimedia[image].url;
-        }
-    }
-    return "none";
 }
 
 function isSectionOrUrl(path) {
@@ -79,7 +97,9 @@ app.get('/:path', (req, res) => {
     let obj = [];
 
     section = path.slice(9);
+
     home_url = "https://content.guardianapis.com/search?orderby=newest&show-fields=starRating,headline,thumbnail,short-url&api-key=591a92b9-9797-407f-96ee-41cd7dbb3532";
+    
     url = section.slice(0, section.search("-"))  === "search" ? 
     "https://content.guardianapis.com/search?q="+section.slice(section.search("-")+1)+"&api-key=591a92b9-9797-407f-96ee-41cd7dbb3532&show-blocks=all" :
     "https://content.guardianapis.com/"+section+"?api-key=591a92b9-9797-407f-96ee-41cd7dbb3532&show-blocks=all";
@@ -103,6 +123,30 @@ app.get('/:path', (req, res) => {
             return obj;
         })
         .then(articles => res.json(articles));
+    }
+
+    if(section !== "home") {
+        if(!isSectionOrUrl(section)) {
+            fetch(url)
+            .then(result => result.json())
+            .then(data => { 
+                obj = 
+                {
+                    id: `${data.response.content.id}`,
+                    img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
+                    `${data.response.content.blocks.main.elements[0].assets[data.response.content.blocks.main.elements[0].assets.length-1].file}`
+                    : undefined,
+                    title: `${data.response.content.webTitle}`,
+                    description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
+                    date: `${getDate(data.response.content.webPublicationDate)}`,
+                    section: `${data.response.content.sectionId}`,
+                    url: `${data.response.content.webUrl}`
+                }
+                return obj;
+            })
+            .then(articles => res.json(articles));
+        }
+
     }
 });
 
