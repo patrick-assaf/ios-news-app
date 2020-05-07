@@ -10,4 +10,5 @@ target 'ios-news-app' do
   pod 'SwiftyJSON', '~> 4.0'
   pod "SwiftSpinner"
   pod 'XLPagerTabStrip', '~> 9.0'
+  pod 'Charts'
 end

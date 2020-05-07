@@ -161,11 +161,11 @@
             <objects>
                 <viewController id="ElO-Z5-WWn" customClass="DetailedArticleViewController" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vtc-ol-eq1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1146"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6L-5f-G8A">
-                                <rect key="frame" x="0.0" y="88" width="414" height="1029"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1112"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="De2-Ke-9jr" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1069"/>
@@ -429,22 +429,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Trending Tab" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zKR-fk-Sbc">
-                                <rect key="frame" x="109" y="427" width="197" height="43"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwA-LY-mHc" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="268" width="414" height="492"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Search Term" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJ2-Vx-676">
+                                <rect key="frame" x="35" y="141" width="148" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="E8q-Dc-1mg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Search Term..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zoT-YC-sHk">
+                                <rect key="frame" x="35" y="177" width="350" height="34"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textFieldAction:" destination="HI0-3Z-FYr" eventType="primaryActionTriggered" id="3Ip-Yu-lHh"/>
+                                </connections>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Trending" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3St-nA-5Zt">
+                                <rect key="frame" x="20" y="80" width="163" height="53"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="ky7-hM-Bko"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="JwA-LY-mHc" firstAttribute="leading" secondItem="cfk-8h-T2x" secondAttribute="leading" id="1Dw-WJ-NXh"/>
+                            <constraint firstItem="cfk-8h-T2x" firstAttribute="trailing" secondItem="zoT-YC-sHk" secondAttribute="trailing" constant="29" id="FM8-RJ-Nrb"/>
+                            <constraint firstItem="zoT-YC-sHk" firstAttribute="top" secondItem="zJ2-Vx-676" secondAttribute="bottom" constant="8" id="JAK-nQ-xnn"/>
+                            <constraint firstItem="zJ2-Vx-676" firstAttribute="top" secondItem="3St-nA-5Zt" secondAttribute="bottom" constant="8" id="V5K-ga-HLw"/>
+                            <constraint firstItem="3St-nA-5Zt" firstAttribute="trailing" secondItem="zJ2-Vx-676" secondAttribute="trailing" id="WWR-hN-XBR"/>
+                            <constraint firstItem="3St-nA-5Zt" firstAttribute="top" secondItem="cfk-8h-T2x" secondAttribute="top" constant="36" id="XYN-Ke-mcw"/>
+                            <constraint firstItem="JwA-LY-mHc" firstAttribute="centerX" secondItem="Tky-gW-GmV" secondAttribute="centerX" id="dxS-fJ-Sxn"/>
+                            <constraint firstItem="3St-nA-5Zt" firstAttribute="leading" secondItem="Tky-gW-GmV" secondAttribute="leadingMargin" id="eIv-ud-wXk"/>
+                            <constraint firstItem="zJ2-Vx-676" firstAttribute="leading" secondItem="zoT-YC-sHk" secondAttribute="leading" id="gOH-AZ-jGo"/>
+                            <constraint firstItem="zJ2-Vx-676" firstAttribute="leading" secondItem="cfk-8h-T2x" secondAttribute="leading" constant="35" id="iEY-KK-ztA"/>
+                            <constraint firstItem="JwA-LY-mHc" firstAttribute="top" secondItem="zoT-YC-sHk" secondAttribute="bottom" constant="57" id="oGB-9x-ztc"/>
+                            <constraint firstItem="cfk-8h-T2x" firstAttribute="bottom" secondItem="JwA-LY-mHc" secondAttribute="bottom" constant="53" id="ojo-6U-wq3"/>
+                            <constraint firstItem="cfk-8h-T2x" firstAttribute="trailing" secondItem="3St-nA-5Zt" secondAttribute="trailing" constant="231" id="wIO-PR-4Lh"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="cfk-8h-T2x"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Trending" image="trending-up" id="MV3-Ef-g47"/>
+                    <connections>
+                        <outlet property="chartView" destination="JwA-LY-mHc" id="Q5P-5t-79X"/>
+                        <outlet property="textBox" destination="zoT-YC-sHk" id="QTV-2X-gYs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XLT-44-Pd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2823.1884057971015" y="314.73214285714283"/>
+            <point key="canvasLocation" x="2821.739130434783" y="314.73214285714283"/>
         </scene>
         <!--Bookmarks-->
         <scene sceneID="Ik1-fp-llu">
@@ -921,7 +964,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="2Ws-Wq-QM4"/>
+        <segue reference="Jxk-8g-c64"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
