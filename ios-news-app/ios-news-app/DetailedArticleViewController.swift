@@ -10,10 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SwiftSpinner
+import Toast_Swift
 
 class DetailedArticleViewController: UIViewController {
     
-    var articleID: String = ""
+    var article: Article!
     var articleURL: String = ""
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleView: UILabel!
@@ -27,10 +28,26 @@ class DetailedArticleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(article.bookmarked == true) {
+            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+        }
+        else if(article.bookmarked == false) {
+            bookmarkButton.image = UIImage(systemName: "bookmark")
+        }
+        
     }
     
     @IBAction func bookmarkArticle(_ sender: Any) {
-        
+        if(article.bookmarked == true) {
+            article.bookmarked = false
+            bookmarkButton.image = UIImage(systemName: "bookmark")
+            self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+        }
+        else if(article.bookmarked == false) {
+            article.bookmarked = true
+            bookmarkButton.image = UIImage(systemName: "bookmark.fill")
+            self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+        }
     }
     
     @IBAction func shareOnTwitter(_ sender: Any) {
@@ -48,7 +65,7 @@ class DetailedArticleViewController: UIViewController {
         
         SwiftSpinner.show(duration: 3.0, title:"Loading Detailed Article...")
         
-        let guardianURL = "http://localhost:5000/guardian-\(articleID.replacingOccurrences(of: "/", with: "~"))"
+        let guardianURL = "http://localhost:5000/guardian-\(article.id.replacingOccurrences(of: "/", with: "~"))"
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):

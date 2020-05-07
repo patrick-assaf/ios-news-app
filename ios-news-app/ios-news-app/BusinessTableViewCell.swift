@@ -28,6 +28,8 @@ class BusinessTableViewCell: UITableViewCell {
     @IBOutlet weak var articleTitle: UILabel!
     @IBOutlet weak var articleDate: UILabel!
     @IBOutlet weak var articleSection: UILabel!
+    
+    @IBOutlet weak var bookmarkButton: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()

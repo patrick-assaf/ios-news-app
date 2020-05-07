@@ -11,11 +11,13 @@ import Alamofire
 import SwiftyJSON
 import SwiftSpinner
 import XLPagerTabStrip
+import Toast_Swift
 
 class Technology: UITableViewController, IndicatorInfoProvider {
 
     var technologyArticles: [Article] = []
-    var articleID: String = ""
+    var bookmarks: [Article] = []
+    var article: Article?
     var tableRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var technologyArticlesTable: UITableView!
@@ -38,6 +40,9 @@ class Technology: UITableViewController, IndicatorInfoProvider {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! TechnologyTableViewCell
         
+        articleCell.bookmarkButton.addTarget(self, action: #selector(bookmark(sender:)), for: .touchUpInside)
+        articleCell.bookmarkButton.tag = indexPath.row
+        
         let index: Int = indexPath.row
         
         articleCell.articleTitle?.text = technologyArticles[index].title
@@ -46,6 +51,22 @@ class Technology: UITableViewController, IndicatorInfoProvider {
         displayArticleImage(index, articleCell: articleCell)
         
         return articleCell
+    }
+    
+    @objc func bookmark(sender: UIButton!) {
+        let buttonTag = sender.tag
+        if(bookmarks.first(where: { $0.id == self.technologyArticles[buttonTag].id }) != nil) {
+            bookmarks.removeAll(where: { $0.id == self.technologyArticles[buttonTag].id })
+            sender.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            self.technologyArticles[buttonTag].bookmarked = false
+            self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+        }
+        else {
+            bookmarks.append(self.technologyArticles[buttonTag])
+            sender.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            self.technologyArticles[buttonTag].bookmarked = true
+            self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+        }
     }
     
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -60,7 +81,17 @@ class Technology: UITableViewController, IndicatorInfoProvider {
         }
         
         let bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) {_ in
-            print("bookmarking" + self.technologyArticles[index].id)
+            let buttonTag = index
+            if(self.bookmarks.first(where: { $0.id == self.technologyArticles[buttonTag].id }) != nil) {
+                self.bookmarks.removeAll(where: { $0.id == self.technologyArticles[buttonTag].id })
+                self.technologyArticles[buttonTag].bookmarked = false
+                self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+            }
+            else {
+                self.bookmarks.append(self.technologyArticles[buttonTag])
+                self.technologyArticles[buttonTag].bookmarked = true
+                self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+            }
         }
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
@@ -73,14 +104,14 @@ class Technology: UITableViewController, IndicatorInfoProvider {
         technologyArticlesTable.deselectRow(at: indexPath as IndexPath, animated: true)
         
         let index: Int = indexPath.row
-        self.articleID = technologyArticles[index].id
+        self.article = technologyArticles[index]
 
         performSegue(withIdentifier: "detailedArticleSegue", sender: cell)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DetailedArticleViewController
-        vc.articleID = self.articleID
+        vc.article = self.article
     }
     
     func displayArticleImage(_ row: Int, articleCell: TechnologyTableViewCell) {

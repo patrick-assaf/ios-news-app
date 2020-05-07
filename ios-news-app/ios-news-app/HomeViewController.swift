@@ -11,14 +11,15 @@ import CoreLocation
 import Alamofire
 import SwiftyJSON
 import SwiftSpinner
+import Toast_Swift
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var homeArticles: [Article] = []
     var bookmarks: [Article] = []
-    var articleID: String = ""
+    var article: Article?
     var refreshControl = UIRefreshControl()
-
+    
     let locationManager = CLLocationManager()
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var stateLabel: UILabel!
@@ -104,18 +105,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let buttonTag = sender.tag
         if(bookmarks.first(where: { $0.id == self.homeArticles[buttonTag].id }) != nil) {
             bookmarks.removeAll(where: { $0.id == self.homeArticles[buttonTag].id })
-            performSegue(withIdentifier: "bookmarkSegue", sender: bookmarks)
-            print("removing " + self.homeArticles[buttonTag].title)
+            self.homeArticles[buttonTag].bookmarked = false
+            sender.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
         }
         else {
             bookmarks.append(self.homeArticles[buttonTag])
-            performSegue(withIdentifier: "bookmarkSegue", sender: bookmarks)
-            print("adding " + self.homeArticles[buttonTag].title)
+            self.homeArticles[buttonTag].bookmarked = true
+            sender.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
         }
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        
+
         let index: Int = indexPath.row
 
         let share = UIAction(title: "Share with Twitter", image: UIImage(named: "twitter")) {_ in
@@ -126,7 +129,17 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         }
         
         let bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) {_ in
-            print("bookmarking" + self.homeArticles[index].id)
+            let buttonTag = index
+            if(self.bookmarks.first(where: { $0.id == self.homeArticles[buttonTag].id }) != nil) {
+                self.bookmarks.removeAll(where: { $0.id == self.homeArticles[buttonTag].id })
+                self.homeArticles[buttonTag].bookmarked = false
+                self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+            }
+            else {
+                self.bookmarks.append(self.homeArticles[buttonTag])
+                self.homeArticles[buttonTag].bookmarked = true
+                self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+            }
         }
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
@@ -139,7 +152,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         homeArticlesTable.deselectRow(at: indexPath as IndexPath, animated: true)
         
         let index: Int = indexPath.row
-        self.articleID = homeArticles[index].id
+        self.article = homeArticles[index]
 
         performSegue(withIdentifier: "detailedArticleSegue", sender: cell)
     }
@@ -147,11 +160,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "detailedArticleSegue") {
             let vc1 = segue.destination as! DetailedArticleViewController
-            vc1.articleID = self.articleID
-        }
-        if(segue.identifier == "bookmarkSegue") {
-            let vc2 = segue.destination as! BookmarksViewController
-            vc2.homeArticles = self.bookmarks
+            vc1.article = self.article
         }
         
     }

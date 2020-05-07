@@ -11,11 +11,13 @@ import Alamofire
 import SwiftyJSON
 import SwiftSpinner
 import XLPagerTabStrip
+import Toast_Swift
 
 class Science: UITableViewController, IndicatorInfoProvider {
 
     var scienceArticles: [Article] = []
-    var articleID: String = ""
+    var bookmarks: [Article] = []
+    var article: Article?
     var tableRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var scienceArticlesTable: UITableView!
@@ -38,6 +40,9 @@ class Science: UITableViewController, IndicatorInfoProvider {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! ScienceTableViewCell
         
+        articleCell.bookmarkButton.addTarget(self, action: #selector(bookmark(sender:)), for: .touchUpInside)
+        articleCell.bookmarkButton.tag = indexPath.row
+        
         let index: Int = indexPath.row
         
         articleCell.articleTitle?.text = scienceArticles[index].title
@@ -46,6 +51,22 @@ class Science: UITableViewController, IndicatorInfoProvider {
         displayArticleImage(index, articleCell: articleCell)
         
         return articleCell
+    }
+    
+    @objc func bookmark(sender: UIButton!) {
+        let buttonTag = sender.tag
+        if(bookmarks.first(where: { $0.id == self.scienceArticles[buttonTag].id }) != nil) {
+            bookmarks.removeAll(where: { $0.id == self.scienceArticles[buttonTag].id })
+            sender.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            self.scienceArticles[buttonTag].bookmarked = false
+            self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+        }
+        else {
+            bookmarks.append(self.scienceArticles[buttonTag])
+            sender.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            self.scienceArticles[buttonTag].bookmarked = true
+            self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+        }
     }
     
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -60,7 +81,17 @@ class Science: UITableViewController, IndicatorInfoProvider {
         }
         
         let bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) {_ in
-            print("bookmarking" + self.scienceArticles[index].id)
+            let buttonTag = index
+            if(self.bookmarks.first(where: { $0.id == self.scienceArticles[buttonTag].id }) != nil) {
+                self.bookmarks.removeAll(where: { $0.id == self.scienceArticles[buttonTag].id })
+                self.scienceArticles[buttonTag].bookmarked = false
+                self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+            }
+            else {
+                self.bookmarks.append(self.scienceArticles[buttonTag])
+                self.scienceArticles[buttonTag].bookmarked = true
+                self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+            }
         }
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
@@ -73,14 +104,14 @@ class Science: UITableViewController, IndicatorInfoProvider {
         scienceArticlesTable.deselectRow(at: indexPath as IndexPath, animated: true)
         
         let index: Int = indexPath.row
-        self.articleID = scienceArticles[index].id
+        self.article = scienceArticles[index]
 
         performSegue(withIdentifier: "detailedArticleSegue", sender: cell)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DetailedArticleViewController
-        vc.articleID = self.articleID
+        vc.article = self.article
     }
     
     func displayArticleImage(_ row: Int, articleCell: ScienceTableViewCell) {

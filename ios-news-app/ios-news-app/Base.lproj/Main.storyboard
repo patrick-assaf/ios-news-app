@@ -152,7 +152,6 @@
                         <outlet property="weatherBackground" destination="jiB-eK-qbP" id="hQ5-OQ-BQA"/>
                         <outlet property="weatherInformation" destination="vUJ-Id-e2o" id="j57-hf-XP1"/>
                         <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="2Ws-Wq-QM4"/>
-                        <segue destination="Yg4-uU-1Gl" kind="presentation" identifier="bookmarkSegue" id="hK3-N8-8ap"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -349,6 +348,7 @@
                                     <outlet property="articleSection" destination="Pzy-7t-0PW" id="qZ7-yq-QIL"/>
                                     <outlet property="articleTitle" destination="Ptk-Da-hS7" id="Pb2-ux-t8b"/>
                                     <outlet property="articleView" destination="sAD-d6-kO3" id="uBg-Xs-QXV"/>
+                                    <outlet property="bookmarkButton" destination="kDY-h5-eGy" id="21J-Rd-cwz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -496,16 +496,24 @@
         <!--Bookmarks-->
         <scene sceneID="Ik1-fp-llu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o4N-3K-HNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="Yg4-uU-1Gl" customClass="BookmarksViewController" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="b0u-Jq-6fc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Bookmarks" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cbj-gS-jqX">
-                                <rect key="frame" x="20" y="45" width="163" height="53"/>
+                                <rect key="frame" x="20" y="75" width="163" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No bookmarks added." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5R-86-YsA">
+                                <rect key="frame" x="20" y="432" width="374" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -515,7 +523,6 @@
                     <tabBarItem key="tabBarItem" title="Bookmarks" image="bookmark.fill" catalog="system" id="tnj-9c-2FT"/>
                     <navigationItem key="navigationItem" id="wbm-un-9LF"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="o4N-3K-HNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3660.8695652173915" y="314.73214285714283"/>
         </scene>
@@ -620,6 +627,7 @@
                                     <outlet property="articleSection" destination="As6-fc-hny" id="3Wz-hR-Xgt"/>
                                     <outlet property="articleTitle" destination="9gZ-14-GP2" id="vFd-5D-dSJ"/>
                                     <outlet property="articleView" destination="ZIv-3L-DC4" id="hmb-WD-nVe"/>
+                                    <outlet property="bookmarkButton" destination="MtY-a9-Vtu" id="EJy-wQ-j0l"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -699,6 +707,7 @@
                                     <outlet property="articleSection" destination="CCV-Cj-WHe" id="X5d-BX-6IX"/>
                                     <outlet property="articleTitle" destination="kd2-UD-aPu" id="Hhv-x5-qUe"/>
                                     <outlet property="articleView" destination="BbW-1X-HcS" id="mbA-2f-UXZ"/>
+                                    <outlet property="bookmarkButton" destination="0TQ-fE-JQ3" id="ta8-Uf-ohg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -778,6 +787,7 @@
                                     <outlet property="articleSection" destination="4g9-Y4-LNj" id="Qv7-rY-w0h"/>
                                     <outlet property="articleTitle" destination="97V-LO-0MD" id="OVB-9s-Xzm"/>
                                     <outlet property="articleView" destination="lbw-Np-ac8" id="606-rp-Yoa"/>
+                                    <outlet property="bookmarkButton" destination="tIl-04-Q4W" id="MkH-gE-n0y"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -840,10 +850,11 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bookmark" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cHH-uL-O8g">
-                                                    <rect key="frame" x="354" y="88" width="33" height="24"/>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r5v-xZ-Z0c">
+                                                    <rect key="frame" x="369" y="91" width="18" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
+                                                    <state key="normal" image="bookmark" catalog="system"/>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </view>
@@ -856,6 +867,7 @@
                                     <outlet property="articleSection" destination="RVy-iv-Nov" id="OJG-tG-2f1"/>
                                     <outlet property="articleTitle" destination="ekg-fr-1e2" id="7Nv-7x-wVk"/>
                                     <outlet property="articleView" destination="kgO-Eb-IKx" id="quZ-Cl-rS3"/>
+                                    <outlet property="bookmarkButton" destination="r5v-xZ-Z0c" id="FvG-gO-Rrg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -935,6 +947,7 @@
                                     <outlet property="articleSection" destination="OTs-wZ-mFk" id="7PX-lL-h8V"/>
                                     <outlet property="articleTitle" destination="u7r-dT-qIk" id="M6b-mn-2Ih"/>
                                     <outlet property="articleView" destination="6BB-Xy-nJO" id="HCs-4F-Kk2"/>
+                                    <outlet property="bookmarkButton" destination="F0s-Dv-m3h" id="Fyn-3G-sXr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -973,7 +986,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hK3-N8-8ap"/>
         <segue reference="2Ws-Wq-QM4"/>
     </inferredMetricsTieBreakers>
     <resources>

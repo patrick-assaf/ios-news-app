@@ -11,11 +11,13 @@ import Alamofire
 import SwiftyJSON
 import SwiftSpinner
 import XLPagerTabStrip
+import Toast_Swift
 
 class Politics: UITableViewController, IndicatorInfoProvider {
 
     var politicsArticles: [Article] = []
-    var articleID: String = ""
+    var bookmarks: [Article] = []
+    var article: Article?
     var tableRefreshControl = UIRefreshControl()
     
     @IBOutlet weak var politicsArticlesTable: UITableView!
@@ -38,6 +40,9 @@ class Politics: UITableViewController, IndicatorInfoProvider {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! PoliticsTableViewCell
         
+        articleCell.bookmarkButton.addTarget(self, action: #selector(bookmark(sender:)), for: .touchUpInside)
+        articleCell.bookmarkButton.tag = indexPath.row
+        
         let index: Int = indexPath.row
         
         articleCell.articleTitle?.text = politicsArticles[index].title
@@ -46,6 +51,20 @@ class Politics: UITableViewController, IndicatorInfoProvider {
         displayArticleImage(index, articleCell: articleCell)
         
         return articleCell
+    }
+    
+    @objc func bookmark(sender: UIButton!) {
+        let buttonTag = sender.tag
+        if(bookmarks.first(where: { $0.id == self.politicsArticles[buttonTag].id }) != nil) {
+            bookmarks.removeAll(where: { $0.id == self.politicsArticles[buttonTag].id })
+            sender.setImage(UIImage(systemName: "bookmark"), for: .normal)
+            self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+        }
+        else {
+            bookmarks.append(self.politicsArticles[buttonTag])
+            sender.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+            self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+        }
     }
     
     override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -60,7 +79,17 @@ class Politics: UITableViewController, IndicatorInfoProvider {
         }
         
         let bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) {_ in
-            print("bookmarking" + self.politicsArticles[index].id)
+            let buttonTag = index
+            if(self.bookmarks.first(where: { $0.id == self.politicsArticles[buttonTag].id }) != nil) {
+                self.bookmarks.removeAll(where: { $0.id == self.politicsArticles[buttonTag].id })
+                self.politicsArticles[buttonTag].bookmarked = false
+                self.view.makeToast("Article Removed from Bookmarks", duration: 3.0, position: .bottom)
+            }
+            else {
+                self.bookmarks.append(self.politicsArticles[buttonTag])
+                self.politicsArticles[buttonTag].bookmarked = true
+                self.view.makeToast("Article Bookmarked. Check out the Bookmarks tab to view", duration: 3.0, position: .bottom)
+            }
         }
 
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
@@ -73,14 +102,14 @@ class Politics: UITableViewController, IndicatorInfoProvider {
         politicsArticlesTable.deselectRow(at: indexPath as IndexPath, animated: true)
         
         let index: Int = indexPath.row
-        self.articleID = politicsArticles[index].id
+        self.article = politicsArticles[index]
 
         performSegue(withIdentifier: "detailedArticleSegue", sender: cell)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc = segue.destination as! DetailedArticleViewController
-        vc.articleID = self.articleID
+        vc.article = self.article
     }
     
     func displayArticleImage(_ row: Int, articleCell: PoliticsTableViewCell) {
