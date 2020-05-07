@@ -8,7 +8,22 @@
 
 import Foundation
 
-class Article {
+class Article: Equatable {
+    
+    static func == (lhs: Article, rhs: Article) -> Bool {
+        return (
+            lhs.key == rhs.key &&
+            lhs.id == rhs.id &&
+            lhs.title == rhs.title &&
+            lhs.date == rhs.date &&
+            lhs.section == rhs.section &&
+            lhs.imageURL == rhs.imageURL &&
+            lhs.description == rhs.description &&
+            lhs.bookmarked == rhs.bookmarked &&
+            lhs.url == rhs.url
+        )
+    }
+    
     var key: String = ""
     var id: String = ""
     var title: String = ""

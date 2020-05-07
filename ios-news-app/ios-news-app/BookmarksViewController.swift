@@ -10,7 +10,7 @@ import UIKit
 
 class BookmarksViewController: UIViewController {
     
-    var bookmarkedArticles: [Article] = []
+    var homeArticles: [Article] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

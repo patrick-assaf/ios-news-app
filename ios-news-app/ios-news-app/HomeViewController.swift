@@ -15,8 +15,8 @@ import SwiftSpinner
 class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     
     var homeArticles: [Article] = []
+    var bookmarks: [Article] = []
     var articleID: String = ""
-    var bookmarkedArticles: [Article] = []
     var refreshControl = UIRefreshControl()
 
     let locationManager = CLLocationManager()
@@ -87,6 +87,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! HomeArticlesTableViewCell
         
+        articleCell.bookmarkButton.addTarget(self, action: #selector(bookmark(sender:)), for: .touchUpInside)
+        articleCell.bookmarkButton.tag = indexPath.row
+        
         let index: Int = indexPath.row
         
         articleCell.articleTitle?.text = homeArticles[index].title
@@ -95,6 +98,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         displayArticleImage(index, articleCell: articleCell)
         
         return articleCell
+    }
+    
+    @objc func bookmark(sender: UIButton!) {
+        let buttonTag = sender.tag
+        if(bookmarks.first(where: { $0.id == self.homeArticles[buttonTag].id }) != nil) {
+            bookmarks.removeAll(where: { $0.id == self.homeArticles[buttonTag].id })
+            performSegue(withIdentifier: "bookmarkSegue", sender: bookmarks)
+            print("removing " + self.homeArticles[buttonTag].title)
+        }
+        else {
+            bookmarks.append(self.homeArticles[buttonTag])
+            performSegue(withIdentifier: "bookmarkSegue", sender: bookmarks)
+            print("adding " + self.homeArticles[buttonTag].title)
+        }
     }
     
     func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -128,8 +145,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! DetailedArticleViewController
-        vc.articleID = self.articleID
+        if(segue.identifier == "detailedArticleSegue") {
+            let vc1 = segue.destination as! DetailedArticleViewController
+            vc1.articleID = self.articleID
+        }
+        if(segue.identifier == "bookmarkSegue") {
+            let vc2 = segue.destination as! BookmarksViewController
+            vc2.homeArticles = self.bookmarks
+        }
+        
     }
     
     func displayArticleImage(_ row: Int, articleCell: HomeArticlesTableViewCell) {

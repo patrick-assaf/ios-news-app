@@ -11,4 +11,5 @@ target 'ios-news-app' do
   pod "SwiftSpinner"
   pod 'XLPagerTabStrip', '~> 9.0'
   pod 'Charts'
+  pod 'Toast-Swift', '~> 5.0.0'
 end
