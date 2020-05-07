@@ -28,7 +28,7 @@ class World: UITableViewController, IndicatorInfoProvider {
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "World")
+        return IndicatorInfo(title: "WORLD")
     }
 
     /*

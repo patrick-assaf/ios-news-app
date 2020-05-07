@@ -18,27 +18,34 @@ class HeadlinesViewController: ButtonBarPagerTabStripViewController {
         
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
-        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 14)
+        settings.style.buttonBarItemFont = .boldSystemFont(ofSize: 16)
         settings.style.selectedBarHeight = 3.0
+        settings.style.selectedBarBackgroundColor = UIColor.systemBlue
         settings.style.buttonBarMinimumLineSpacing = 0
-        settings.style.buttonBarItemTitleColor = .black
+        settings.style.buttonBarItemTitleColor = UIColor.gray
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
         settings.style.buttonBarLeftContentInset = 0
         settings.style.buttonBarRightContentInset = 0
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, progressPercentage: CGFloat, changeCurrentIndex: Bool, animated: Bool) -> Void in
             guard changeCurrentIndex == true else { return }
-            oldCell?.label.textColor = .black
-            newCell?.label.textColor = .blue
+            oldCell?.label.textColor = UIColor.gray
+            newCell?.label.textColor = UIColor.systemBlue
         }
+        
+        SwiftSpinner.show(duration: 3.0, title:"Loading Headlines Page...")
         
         super.viewDidLoad()
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let world = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "World")
-        let business = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Business")
-        return [world, business]
+        let world = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WORLD")
+        let business = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "BUSINESS")
+        let politics = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "POLITICS")
+        let sports = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SPORTS")
+        let technology = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TECHNOLOGY")
+        let science = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SCIENCE")
+        return [world, business, politics, sports, technology, science]
     }
 
 }

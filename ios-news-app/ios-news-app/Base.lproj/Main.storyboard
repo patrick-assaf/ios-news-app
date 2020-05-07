@@ -283,7 +283,7 @@
         <!--World-->
         <scene sceneID="xGM-7v-pzq">
             <objects>
-                <tableViewController storyboardIdentifier="World" id="a3A-2a-Xff" customClass="World" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WORLD" id="a3A-2a-Xff" customClass="World" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="20y-ns-iHE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -320,8 +320,26 @@
                                 <rect key="frame" x="0.0" y="39" width="414" height="774"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cvj-yL-Viv">
-                                        <rect key="frame" x="0.0" y="89" width="414" height="72"/>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mIn-tc-XfG">
+                                        <rect key="frame" x="0.0" y="219" width="414" height="555"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <viewLayoutGuide key="contentLayoutGuide" id="Mhg-Jy-Ry6"/>
+                                        <viewLayoutGuide key="frameLayoutGuide" id="RZw-nR-N3Z"/>
+                                    </scrollView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Headlines" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-4P-hWk">
+                                        <rect key="frame" x="30" y="39" width="163" height="42"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Enter keyword..." translatesAutoresizingMaskIntoConstraints="NO" id="bbU-vq-HX1">
+                                        <rect key="frame" x="20" y="91" width="374" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cvj-yL-Viv" customClass="ButtonBarView" customModule="XLPagerTabStrip">
+                                        <rect key="frame" x="0.0" y="150" width="414" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="k1S-M5-Aam">
@@ -332,13 +350,6 @@
                                         </collectionViewFlowLayout>
                                         <cells/>
                                     </collectionView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Headlines" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-4P-hWk">
-                                        <rect key="frame" x="8" y="39" width="163" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -347,6 +358,10 @@
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Headlines" image="rectangle.split.3x3.fill" catalog="system" id="cPa-gy-q4n"/>
+                    <connections>
+                        <outlet property="buttonBarView" destination="Cvj-yL-Viv" id="4Qz-Bb-RIH"/>
+                        <outlet property="containerView" destination="mIn-tc-XfG" id="q2N-b9-V6C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -444,7 +459,7 @@
         <!--Business-->
         <scene sceneID="NEQ-nZ-y7j">
             <objects>
-                <tableViewController storyboardIdentifier="Business" id="sIy-kb-0kD" customClass="Business" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="BUSINESS" id="sIy-kb-0kD" customClass="Business" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="zWB-yX-VP8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -468,6 +483,118 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZb-5I-Lz7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1911.594202898551" y="1013.8392857142857"/>
+        </scene>
+        <!--Politics-->
+        <scene sceneID="yMX-tp-QFR">
+            <objects>
+                <tableViewController storyboardIdentifier="POLITICS" id="ZxL-Bg-MCQ" customClass="Politics" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GRu-aP-Nyk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="128" id="oNd-Is-FdX" customClass="HomeArticlesTableViewCell" customModule="ios_news_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oNd-Is-FdX" id="eT0-pO-k8Z">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ZxL-Bg-MCQ" id="7nL-kw-QYk"/>
+                            <outlet property="delegate" destination="ZxL-Bg-MCQ" id="gXv-fo-9Om"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ACC-D5-pAp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2751" y="1014"/>
+        </scene>
+        <!--Sports-->
+        <scene sceneID="zyH-aD-zQ2">
+            <objects>
+                <tableViewController storyboardIdentifier="SPORTS" id="cJZ-Ta-YMS" customClass="Sports" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xD0-Z5-bxe">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="128" id="UHH-lG-JDS" customClass="HomeArticlesTableViewCell" customModule="ios_news_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UHH-lG-JDS" id="AES-rp-RYj">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="cJZ-Ta-YMS" id="vv2-wi-ID5"/>
+                            <outlet property="delegate" destination="cJZ-Ta-YMS" id="dnw-SS-2RL"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JLe-Pf-Lqg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1077" y="1744"/>
+        </scene>
+        <!--Technology-->
+        <scene sceneID="XUf-CL-N3U">
+            <objects>
+                <tableViewController storyboardIdentifier="TECHNOLOGY" id="egx-fo-faK" customClass="Technology" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hjA-jZ-om6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="128" id="Q4Y-ri-3P3" customClass="HomeArticlesTableViewCell" customModule="ios_news_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Q4Y-ri-3P3" id="wQT-xQ-6XF">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="egx-fo-faK" id="lsC-Rl-eUJ"/>
+                            <outlet property="delegate" destination="egx-fo-faK" id="X5i-ND-Zjm"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VTa-ht-cV5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1912" y="1744"/>
+        </scene>
+        <!--Science-->
+        <scene sceneID="p04-NT-az7">
+            <objects>
+                <tableViewController storyboardIdentifier="SCIENCE" id="9Dh-Vx-3l1" customClass="Science" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="M1O-sh-Bwz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="128" id="y6V-JT-B3X" customClass="HomeArticlesTableViewCell" customModule="ios_news_app" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="128"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="y6V-JT-B3X" id="gD7-zd-gZZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9Dh-Vx-3l1" id="t0l-y0-v2s"/>
+                            <outlet property="delegate" destination="9Dh-Vx-3l1" id="Vwg-hH-la5"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cga-QK-gUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2751" y="1744"/>
         </scene>
     </scenes>
     <resources>

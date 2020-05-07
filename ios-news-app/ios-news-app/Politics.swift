@@ -1,34 +1,34 @@
 //
-//  Business.swift
+//  Politics.swift
 //  ios-news-app
 //
-//  Created by Patrick Assaf on 5/5/20.
+//  Created by Patrick Assaf on 5/6/20.
 //  Copyright © 2020 patrickassaf. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
 
-class Business: UITableViewController, IndicatorInfoProvider {
+class Politics: UITableViewController, IndicatorInfoProvider {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! HomeArticlesTableViewCell
         
         return articleCell
     }
-    
+
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "BUSINESS")
+        return IndicatorInfo(title: "POLITICS")
     }
 
     /*
