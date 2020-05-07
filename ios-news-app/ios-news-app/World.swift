@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SwiftSpinner
 import XLPagerTabStrip
 
 class World: UITableViewController, IndicatorInfoProvider {
@@ -21,6 +22,8 @@ class World: UITableViewController, IndicatorInfoProvider {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SwiftSpinner.show(duration: 3.0, title:"Loading WORLD Headlines...")
         
         tableRefreshControl.attributedTitle = NSAttributedString()
         tableRefreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)

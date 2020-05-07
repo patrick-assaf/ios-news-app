@@ -157,11 +157,11 @@
             <objects>
                 <viewController id="ElO-Z5-WWn" customClass="DetailedArticleViewController" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vtc-ol-eq1">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1146"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6L-5f-G8A">
-                                <rect key="frame" x="0.0" y="88" width="414" height="1029"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="1112"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="De2-Ke-9jr" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1069"/>
@@ -284,7 +284,7 @@
         <scene sceneID="xGM-7v-pzq">
             <objects>
                 <tableViewController storyboardIdentifier="WORLD" id="a3A-2a-Xff" customClass="World" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="20y-ns-iHE">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="20y-ns-iHE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -347,13 +347,14 @@
                     </tableView>
                     <connections>
                         <outlet property="worldArticlesTable" destination="20y-ns-iHE" id="2vY-OI-8J4"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="Jxk-8g-c64"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwu-OI-NaN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076.8115942028987" y="1013.8392857142857"/>
         </scene>
-        <!--Headlines-->
+        <!--Headlines View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController id="8rJ-Kc-sve" customClass="HeadlinesViewController" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
@@ -371,18 +372,6 @@
                                         <viewLayoutGuide key="contentLayoutGuide" id="Mhg-Jy-Ry6"/>
                                         <viewLayoutGuide key="frameLayoutGuide" id="RZw-nR-N3Z"/>
                                     </scrollView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Headlines" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-4P-hWk">
-                                        <rect key="frame" x="30" y="39" width="163" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Enter keyword..." translatesAutoresizingMaskIntoConstraints="NO" id="bbU-vq-HX1">
-                                        <rect key="frame" x="20" y="91" width="374" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </searchBar>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Cvj-yL-Viv" customClass="ButtonBarView" customModule="XLPagerTabStrip">
                                         <rect key="frame" x="0.0" y="150" width="414" height="61"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -395,6 +384,18 @@
                                         </collectionViewFlowLayout>
                                         <cells/>
                                     </collectionView>
+                                    <searchBar contentMode="redraw" fixedFrame="YES" searchBarStyle="minimal" placeholder="Enter keyword..." translatesAutoresizingMaskIntoConstraints="NO" id="bbU-vq-HX1">
+                                        <rect key="frame" x="20" y="91" width="374" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </searchBar>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Headlines" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="N3h-4P-hWk">
+                                        <rect key="frame" x="30" y="38" width="163" height="53"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
@@ -402,7 +403,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Headlines" image="rectangle.split.3x3.fill" catalog="system" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" id="cih-B7-tb2"/>
                     <connections>
                         <outlet property="buttonBarView" destination="Cvj-yL-Viv" id="4Qz-Bb-RIH"/>
                         <outlet property="containerView" destination="mIn-tc-XfG" id="q2N-b9-V6C"/>
@@ -410,7 +411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076.8115942028987" y="314.73214285714283"/>
+            <point key="canvasLocation" x="1986.9565217391305" y="314.73214285714283"/>
         </scene>
         <!--Trending-->
         <scene sceneID="Qa4-LM-cx2">
@@ -435,7 +436,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XLT-44-Pd3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1913.0434782608697" y="314.73214285714283"/>
+            <point key="canvasLocation" x="2823.1884057971015" y="314.73214285714283"/>
         </scene>
         <!--Bookmarks-->
         <scene sceneID="Ik1-fp-llu">
@@ -460,7 +461,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o4N-3K-HNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2750.7246376811595" y="314.73214285714283"/>
+            <point key="canvasLocation" x="3660.8695652173915" y="314.73214285714283"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -473,7 +474,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="s4A-1f-diR" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="EaY-j7-Ey8" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="HI0-3Z-FYr" kind="relationship" relationship="viewControllers" id="Ij4-W2-XJS"/>
                         <segue destination="Yg4-uU-1Gl" kind="relationship" relationship="viewControllers" id="OIP-hp-aMM"/>
                     </connections>
@@ -505,7 +506,7 @@
         <scene sceneID="NEQ-nZ-y7j">
             <objects>
                 <tableViewController storyboardIdentifier="BUSINESS" id="sIy-kb-0kD" customClass="Business" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="zWB-yX-VP8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="zWB-yX-VP8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -566,6 +567,10 @@
                             <outlet property="delegate" destination="sIy-kb-0kD" id="TaO-9N-7o7"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="businessArticlesTable" destination="zWB-yX-VP8" id="mm0-KB-T3Y"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="wUZ-ro-Z9S"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PZb-5I-Lz7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -575,7 +580,7 @@
         <scene sceneID="yMX-tp-QFR">
             <objects>
                 <tableViewController storyboardIdentifier="POLITICS" id="ZxL-Bg-MCQ" customClass="Politics" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="GRu-aP-Nyk">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="GRu-aP-Nyk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -636,6 +641,10 @@
                             <outlet property="delegate" destination="ZxL-Bg-MCQ" id="gXv-fo-9Om"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="politicsArticlesTable" destination="GRu-aP-Nyk" id="z91-Wj-61g"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="as4-Ak-jxd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ACC-D5-pAp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -645,7 +654,7 @@
         <scene sceneID="zyH-aD-zQ2">
             <objects>
                 <tableViewController storyboardIdentifier="SPORTS" id="cJZ-Ta-YMS" customClass="Sports" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="xD0-Z5-bxe">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="xD0-Z5-bxe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -706,6 +715,10 @@
                             <outlet property="delegate" destination="cJZ-Ta-YMS" id="dnw-SS-2RL"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="sportsArticlesTable" destination="xD0-Z5-bxe" id="Onm-xU-n8v"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="4eP-sC-bqI"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JLe-Pf-Lqg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -715,7 +728,7 @@
         <scene sceneID="XUf-CL-N3U">
             <objects>
                 <tableViewController storyboardIdentifier="TECHNOLOGY" id="egx-fo-faK" customClass="Technology" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="hjA-jZ-om6">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="hjA-jZ-om6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -776,6 +789,10 @@
                             <outlet property="delegate" destination="egx-fo-faK" id="X5i-ND-Zjm"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="technologyArticlesTable" destination="hjA-jZ-om6" id="rx5-SI-ObL"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="sua-9Z-qPS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VTa-ht-cV5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -785,7 +802,7 @@
         <scene sceneID="p04-NT-az7">
             <objects>
                 <tableViewController storyboardIdentifier="SCIENCE" id="9Dh-Vx-3l1" customClass="Science" customModule="ios_news_app" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="M1O-sh-Bwz">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="127" sectionHeaderHeight="28" sectionFooterHeight="28" id="M1O-sh-Bwz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -846,12 +863,38 @@
                             <outlet property="delegate" destination="9Dh-Vx-3l1" id="Vwg-hH-la5"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="scienceArticlesTable" destination="M1O-sh-Bwz" id="R7b-yd-Hu7"/>
+                        <segue destination="ElO-Z5-WWn" kind="show" identifier="detailedArticleSegue" id="sO1-wo-PE6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cga-QK-gUk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2751" y="1744"/>
         </scene>
+        <!--Headlines-->
+        <scene sceneID="iho-b2-Le2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EaY-j7-Ey8" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Headlines" image="rectangle.split.3x3.fill" catalog="system" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wG2-0b-WTT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="fIe-8z-lRt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RNg-Pb-2EQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1076.8115942028987" y="314.73214285714283"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="sO1-wo-PE6"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="bookmark.fill" catalog="system" width="112" height="128"/>

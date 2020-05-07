@@ -46,7 +46,7 @@ class DetailedArticleViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        SwiftSpinner.show(duration: 3.0, title:"Loading Detailed article...")
+        SwiftSpinner.show(duration: 3.0, title:"Loading Detailed Article...")
         
         let guardianURL = "http://localhost:5000/guardian-\(articleID.replacingOccurrences(of: "/", with: "~"))"
         AF.request(guardianURL).responseJSON { response in

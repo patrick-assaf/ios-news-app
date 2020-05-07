@@ -33,8 +33,6 @@ class HeadlinesViewController: ButtonBarPagerTabStripViewController {
             newCell?.label.textColor = UIColor.systemBlue
         }
         
-        SwiftSpinner.show(duration: 3.0, title:"Loading Headlines Page...")
-        
         super.viewDidLoad()
     }
     

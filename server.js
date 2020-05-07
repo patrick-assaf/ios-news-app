@@ -74,7 +74,8 @@ function isSectionOrUrl(path) {
         path === "business" || 
         path === "technology" || 
         path === "sport" || 
-        path === "sports"
+        path === "sports" ||
+        path === "science"
     );
 }
 
@@ -139,7 +140,7 @@ app.get('/:path', (req, res) => {
                     title: `${data.response.content.webTitle}`,
                     description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
                     date: `${getDate(data.response.content.webPublicationDate)}`,
-                    section: `${data.response.content.sectionId}`,
+                    section: `${data.response.content.sectionName}`,
                     url: `${data.response.content.webUrl}`
                 }
                 return obj;
@@ -164,7 +165,6 @@ app.get('/:path', (req, res) => {
                 .map((article, index) =>
                     obj[index] = 
                     {
-                        key: `${index}`, 
                         id: `${article.id}`,
                         img: (article.blocks.main.elements[0].assets.length !== 0) ? 
                             `${article.blocks.main.elements[0].assets[article.blocks.main.elements[0].assets.length-1].file}`
@@ -185,7 +185,7 @@ app.get('/:path', (req, res) => {
                     title: `${data.response.content.webTitle}`,
                     description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
                     date: `${dateFormat(data.response.content.webPublicationDate)}`,
-                    section: `${data.response.content.sectionId}`,
+                    section: `${data.response.content.sectionName}`,
                     url: `${data.response.content.webUrl}`
                 });
                 return obj;
