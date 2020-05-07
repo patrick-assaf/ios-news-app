@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
 const app = express();
+const googleTrends = require('google-trends-api');
 
 app.use(cors());
 
@@ -91,108 +92,128 @@ app.get('/:path', (req, res) => {
     const source = path.slice(0, path.search("-"));
     let section = '';
 
-    let home_url = '';
+    let home_url = "https://content.guardianapis.com/search?orderby=newest&show-fields=starRating,headline,thumbnail,short-url&api-key=591a92b9-9797-407f-96ee-41cd7dbb3532";
     let url = '';
-    let default_img = '';
 
     let obj = [];
 
-    section = path.slice(9);
-
-    home_url = "https://content.guardianapis.com/search?orderby=newest&show-fields=starRating,headline,thumbnail,short-url&api-key=591a92b9-9797-407f-96ee-41cd7dbb3532";
-    
-    url = section.slice(0, section.search("-"))  === "search" ? 
-    "https://content.guardianapis.com/search?q="+section.slice(section.search("-")+1)+"&api-key=591a92b9-9797-407f-96ee-41cd7dbb3532&show-blocks=all" :
-    "https://content.guardianapis.com/"+section+"?api-key=591a92b9-9797-407f-96ee-41cd7dbb3532&show-blocks=all";
-    default_img = "https://assets.guim.co.uk/images/eada8aa27c12fe2d5afa3a89d3fbae0d/fallback-logo.png";
-
-    if(section === "home") {
-        fetch(home_url)
-        .then(result => result.json())
-        .then(data => { data.response.results
-        .map((article, index) => {
-            obj[index] = 
-            {
-                key: `${index}`, 
-                id: `${article.id}`,
-                img: `${article.fields.thumbnail}`,
-                title: `${article.webTitle}`,
-                date: `${dateFormat(article.webPublicationDate)}`,
-                section: `${article.sectionName}`,
-                url: `${article.webUrl}`
-            }})
-            return obj;
-        })
-        .then(articles => res.json(articles));
+    if(source == "google") {
+        section = path.slice(7);
+    }
+    else if(source == "guardian"){
+        section = path.slice(9);
     }
 
-    if(section !== "home") {
-        if(!isSectionOrUrl(section)) {
-            fetch(url)
+    if(source == "guardian") {
+        url = section.slice(0, section.search("-"))  === "search" ? 
+        "https://content.guardianapis.com/search?q="+section.slice(section.search("-")+1)+"&api-key=591a92b9-9797-407f-96ee-41cd7dbb3532&show-blocks=all" :
+        "https://content.guardianapis.com/"+section+"?api-key=591a92b9-9797-407f-96ee-41cd7dbb3532&show-blocks=all";
+
+        if(section === "home") {
+            fetch(home_url)
             .then(result => result.json())
-            .then(data => { 
-                obj = 
+            .then(data => { data.response.results
+            .map((article, index) => {
+                obj[index] = 
                 {
-                    id: `${data.response.content.id}`,
-                    img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
-                    `${data.response.content.blocks.main.elements[0].assets[data.response.content.blocks.main.elements[0].assets.length-1].file}`
-                    : "undefined",
-                    title: `${data.response.content.webTitle}`,
-                    description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
-                    date: `${getDate(data.response.content.webPublicationDate)}`,
-                    section: `${data.response.content.sectionName}`,
-                    url: `${data.response.content.webUrl}`
-                }
+                    key: `${index}`, 
+                    id: `${article.id}`,
+                    img: `${article.fields.thumbnail}`,
+                    title: `${article.webTitle}`,
+                    date: `${dateFormat(article.webPublicationDate)}`,
+                    section: `${article.sectionName}`,
+                    url: `${article.webUrl}`
+                }})
                 return obj;
             })
             .then(articles => res.json(articles));
         }
-        else if(isSectionOrUrl(section)) {
-            fetch(url)
-            .then(result => result.json())
-            .then(data => {
-                (isSectionOrUrl(section) || isSearch(section) ? data.response.results
-                .filter((article) => {
-                    if(isvalid(article.blocks.body[0].bodyTextSummary) && isvalid(article.blocks.main)
-                    && isvalid(article.webTitle) && isvalid(article.webPublicationDate) && isvalid(article.sectionId)
-                    && isvalid(article.webUrl)) {
-                        return true;
-                    }
-                    else {
-                        return false;
-                    }
-                })
-                .map((article, index) =>
-                    obj[index] = 
+    
+        if(section !== "home") {
+            if(!isSectionOrUrl(section)) {
+                fetch(url)
+                .then(result => result.json())
+                .then(data => { 
+                    obj = 
                     {
-                        id: `${article.id}`,
-                        img: (article.blocks.main.elements[0].assets.length !== 0) ? 
-                            `${article.blocks.main.elements[0].assets[article.blocks.main.elements[0].assets.length-1].file}`
-                            : "undefined",
-                        title: `${article.webTitle}`,
-                        description: `${article.blocks.body[0].bodyTextSummary}`,
-                        date: `${dateFormat(article.webPublicationDate)}`,
-                        section: `${article.sectionName}`,
-                        url: `${article.webUrl}`
-                    }
-                )
-                : obj = 
-                {
-                    id: `${data.response.content.id}`,
-                    img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
+                        id: `${data.response.content.id}`,
+                        img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
                         `${data.response.content.blocks.main.elements[0].assets[data.response.content.blocks.main.elements[0].assets.length-1].file}`
                         : "undefined",
-                    title: `${data.response.content.webTitle}`,
-                    description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
-                    date: `${dateFormat(data.response.content.webPublicationDate)}`,
-                    section: `${data.response.content.sectionName}`,
-                    url: `${data.response.content.webUrl}`
-                });
-                return obj;
-            })
-            .then(articles => res.json(articles));
-        } 
+                        title: `${data.response.content.webTitle}`,
+                        description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
+                        date: `${getDate(data.response.content.webPublicationDate)}`,
+                        section: `${data.response.content.sectionName}`,
+                        url: `${data.response.content.webUrl}`
+                    }
+                    return obj;
+                })
+                .then(articles => res.json(articles));
+            }
+            else if(isSectionOrUrl(section)) {
+                fetch(url)
+                .then(result => result.json())
+                .then(data => {
+                    (isSectionOrUrl(section) || isSearch(section) ? data.response.results
+                    .filter((article) => {
+                        if(isvalid(article.blocks.body[0].bodyTextSummary) && isvalid(article.blocks.main)
+                        && isvalid(article.webTitle) && isvalid(article.webPublicationDate) && isvalid(article.sectionId)
+                        && isvalid(article.webUrl)) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    })
+                    .map((article, index) =>
+                        obj[index] = 
+                        {
+                            id: `${article.id}`,
+                            img: (article.blocks.main.elements[0].assets.length !== 0) ? 
+                                `${article.blocks.main.elements[0].assets[article.blocks.main.elements[0].assets.length-1].file}`
+                                : "undefined",
+                            title: `${article.webTitle}`,
+                            description: `${article.blocks.body[0].bodyTextSummary}`,
+                            date: `${dateFormat(article.webPublicationDate)}`,
+                            section: `${article.sectionName}`,
+                            url: `${article.webUrl}`
+                        }
+                    )
+                    : obj = 
+                    {
+                        id: `${data.response.content.id}`,
+                        img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
+                            `${data.response.content.blocks.main.elements[0].assets[data.response.content.blocks.main.elements[0].assets.length-1].file}`
+                            : "undefined",
+                        title: `${data.response.content.webTitle}`,
+                        description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
+                        date: `${dateFormat(data.response.content.webPublicationDate)}`,
+                        section: `${data.response.content.sectionName}`,
+                        url: `${data.response.content.webUrl}`
+                    });
+                    return obj;
+                })
+                .then(articles => res.json(articles));
+            } 
+        }
     }
+
+    if(source == "google") {
+        let startDate = new Date(2019,06,01);
+        googleTrends.interestOverTime({keyword: section, startTime: startDate})
+        .then(data => JSON.parse(data))
+        .then(results => { results.default.timelineData
+            .map((data, index) =>
+                obj[index] = `${data.value[0]}`
+            )
+            return obj;
+        })
+        .then(trendingData => res.json(trendingData))
+        .catch(function(err){
+            console.error(err);
+        });
+    }
+    
 });
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
