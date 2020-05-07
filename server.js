@@ -146,7 +146,52 @@ app.get('/:path', (req, res) => {
             })
             .then(articles => res.json(articles));
         }
-
+        else if(isSectionOrUrl(section)) {
+            fetch(url)
+            .then(result => result.json())
+            .then(data => {
+                (isSectionOrUrl(section) || isSearch(section) ? data.response.results
+                .filter((article) => {
+                    if(isvalid(article.blocks.body[0].bodyTextSummary) && isvalid(article.blocks.main)
+                    && isvalid(article.webTitle) && isvalid(article.webPublicationDate) && isvalid(article.sectionId)
+                    && isvalid(article.webUrl)) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                })
+                .map((article, index) =>
+                    obj[index] = 
+                    {
+                        key: `${index}`, 
+                        id: `${article.id}`,
+                        img: (article.blocks.main.elements[0].assets.length !== 0) ? 
+                            `${article.blocks.main.elements[0].assets[article.blocks.main.elements[0].assets.length-1].file}`
+                            : "undefined",
+                        title: `${article.webTitle}`,
+                        description: `${article.blocks.body[0].bodyTextSummary}`,
+                        date: `${dateFormat(article.webPublicationDate)}`,
+                        section: `${article.sectionName}`,
+                        url: `${article.webUrl}`
+                    }
+                )
+                : obj = 
+                {
+                    id: `${data.response.content.id}`,
+                    img: (data.response.content.blocks.main.elements[0].assets.length !== 0) ? 
+                        `${data.response.content.blocks.main.elements[0].assets[data.response.content.blocks.main.elements[0].assets.length-1].file}`
+                        : "undefined",
+                    title: `${data.response.content.webTitle}`,
+                    description: `${data.response.content.blocks.body[0].bodyTextSummary}`,
+                    date: `${dateFormat(data.response.content.webPublicationDate)}`,
+                    section: `${data.response.content.sectionId}`,
+                    url: `${data.response.content.webUrl}`
+                });
+                return obj;
+            })
+            .then(articles => res.json(articles));
+        } 
     }
 });
 

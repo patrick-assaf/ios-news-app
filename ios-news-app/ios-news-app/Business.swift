@@ -22,7 +22,7 @@ class Business: UITableViewController, IndicatorInfoProvider {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! HomeArticlesTableViewCell
+        let articleCell = tableView.dequeueReusableCell(withIdentifier: "articleCell", for: indexPath) as! BusinessTableViewCell
         
         return articleCell
     }

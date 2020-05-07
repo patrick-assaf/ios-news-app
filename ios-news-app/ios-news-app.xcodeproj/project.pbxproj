@@ -26,6 +26,12 @@
 		1FCDF32524639485000363A0 /* Sports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF32424639485000363A0 /* Sports.swift */; };
 		1FCDF327246394A1000363A0 /* Technology.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF326246394A1000363A0 /* Technology.swift */; };
 		1FCDF329246394B8000363A0 /* Science.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF328246394B8000363A0 /* Science.swift */; };
+		1FCDF32B24639DF5000363A0 /* WorldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF32A24639DF5000363A0 /* WorldTableViewCell.swift */; };
+		1FCDF32D24639E12000363A0 /* BusinessTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF32C24639E12000363A0 /* BusinessTableViewCell.swift */; };
+		1FCDF32F24639E23000363A0 /* PoliticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF32E24639E23000363A0 /* PoliticsTableViewCell.swift */; };
+		1FCDF33124639E33000363A0 /* SportsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF33024639E33000363A0 /* SportsTableViewCell.swift */; };
+		1FCDF33324639E4D000363A0 /* TechnologyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF33224639E4D000363A0 /* TechnologyTableViewCell.swift */; };
+		1FCDF33524639E60000363A0 /* ScienceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FCDF33424639E60000363A0 /* ScienceTableViewCell.swift */; };
 		F80205A23EB12A43B1402993 /* Pods_ios_news_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15D7688AF09601D494960AF5 /* Pods_ios_news_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +58,12 @@
 		1FCDF32424639485000363A0 /* Sports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sports.swift; sourceTree = "<group>"; };
 		1FCDF326246394A1000363A0 /* Technology.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Technology.swift; sourceTree = "<group>"; };
 		1FCDF328246394B8000363A0 /* Science.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Science.swift; sourceTree = "<group>"; };
+		1FCDF32A24639DF5000363A0 /* WorldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTableViewCell.swift; sourceTree = "<group>"; };
+		1FCDF32C24639E12000363A0 /* BusinessTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessTableViewCell.swift; sourceTree = "<group>"; };
+		1FCDF32E24639E23000363A0 /* PoliticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticsTableViewCell.swift; sourceTree = "<group>"; };
+		1FCDF33024639E33000363A0 /* SportsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportsTableViewCell.swift; sourceTree = "<group>"; };
+		1FCDF33224639E4D000363A0 /* TechnologyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnologyTableViewCell.swift; sourceTree = "<group>"; };
+		1FCDF33424639E60000363A0 /* ScienceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScienceTableViewCell.swift; sourceTree = "<group>"; };
 		3FC2E7D28149BACDBB7B1FE8 /* Pods-ios-news-app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-news-app.release.xcconfig"; path = "Target Support Files/Pods-ios-news-app/Pods-ios-news-app.release.xcconfig"; sourceTree = "<group>"; };
 		4F5C3845E5D781192283C99B /* Pods-ios-news-app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-news-app.debug.xcconfig"; path = "Target Support Files/Pods-ios-news-app/Pods-ios-news-app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,11 +109,17 @@
 				1FCDF31C2461BE88000363A0 /* DetailedArticleViewController.swift */,
 				1FCDF2FF244DFC7C000363A0 /* HeadlinesViewController.swift */,
 				1FCDF31E24622FAC000363A0 /* World.swift */,
+				1FCDF32A24639DF5000363A0 /* WorldTableViewCell.swift */,
 				1FCDF32024622FBF000363A0 /* Business.swift */,
+				1FCDF32C24639E12000363A0 /* BusinessTableViewCell.swift */,
 				1FCDF3222463946A000363A0 /* Politics.swift */,
+				1FCDF32E24639E23000363A0 /* PoliticsTableViewCell.swift */,
 				1FCDF32424639485000363A0 /* Sports.swift */,
+				1FCDF33024639E33000363A0 /* SportsTableViewCell.swift */,
 				1FCDF326246394A1000363A0 /* Technology.swift */,
+				1FCDF33224639E4D000363A0 /* TechnologyTableViewCell.swift */,
 				1FCDF328246394B8000363A0 /* Science.swift */,
+				1FCDF33424639E60000363A0 /* ScienceTableViewCell.swift */,
 				1FCDF30F244E373B000363A0 /* TrendingViewController.swift */,
 				1FCDF311244E376C000363A0 /* BookmarksViewController.swift */,
 				1FCDF304244DFC7D000363A0 /* Assets.xcassets */,
@@ -248,19 +266,25 @@
 			files = (
 				1FCDF312244E376C000363A0 /* BookmarksViewController.swift in Sources */,
 				1FCDF31D2461BE88000363A0 /* DetailedArticleViewController.swift in Sources */,
+				1FCDF32D24639E12000363A0 /* BusinessTableViewCell.swift in Sources */,
 				1FCDF300244DFC7C000363A0 /* HeadlinesViewController.swift in Sources */,
+				1FCDF33524639E60000363A0 /* ScienceTableViewCell.swift in Sources */,
 				1FCDF327246394A1000363A0 /* Technology.swift in Sources */,
 				1FCDF2FE244DFC7C000363A0 /* HomeViewController.swift in Sources */,
+				1FCDF33124639E33000363A0 /* SportsTableViewCell.swift in Sources */,
 				1FCDF3232463946B000363A0 /* Politics.swift in Sources */,
 				1FCDF31F24622FAC000363A0 /* World.swift in Sources */,
 				1FCDF31724548404000363A0 /* HomeArticlesTableViewCell.swift in Sources */,
 				1FCDF31924548642000363A0 /* Article.swift in Sources */,
 				1FCDF32524639485000363A0 /* Sports.swift in Sources */,
 				1FCDF310244E373B000363A0 /* TrendingViewController.swift in Sources */,
+				1FCDF32F24639E23000363A0 /* PoliticsTableViewCell.swift in Sources */,
 				1FCDF32124622FBF000363A0 /* Business.swift in Sources */,
 				1FCDF2FA244DFC7C000363A0 /* AppDelegate.swift in Sources */,
 				1FCDF329246394B8000363A0 /* Science.swift in Sources */,
+				1FCDF32B24639DF5000363A0 /* WorldTableViewCell.swift in Sources */,
 				1FCDF2FC244DFC7C000363A0 /* SceneDelegate.swift in Sources */,
+				1FCDF33324639E4D000363A0 /* TechnologyTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
