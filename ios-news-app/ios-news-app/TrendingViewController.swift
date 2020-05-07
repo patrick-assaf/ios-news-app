@@ -8,17 +8,40 @@
 
 import UIKit
 import Charts
+import Alamofire
+import SwiftyJSON
+import SwiftSpinner
 
 class TrendingViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textBox: UITextField!
     @IBOutlet weak var chartView: LineChartView!
     
-    var numbers : [Double] = []
+    var numbers: [Double] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.textBox.delegate = self
+        
+        SwiftSpinner.show(duration: 3.0, title:"Loading Trending Page...")
+        
+        let googleTrendsURL = "http://localhost:5000/google-coronavirus"
+        AF.request(googleTrendsURL).responseJSON { response in
+            switch response.result {
+            case let .success(value):
+                self.numbers.removeAll()
+                let googleJSON: JSON = JSON(value)
+                for i in 0..<googleJSON.count {
+                    let value: String = googleJSON[i].string!
+                    if let number = Double(value) {
+                        self.numbers.append(number)
+                    }
+                }
+                self.updateChart(keyword: "Coronavirus")
+            case let .failure(error):
+                print(error)
+            }
+        }
         
     }
     
@@ -33,14 +56,33 @@ class TrendingViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func textFieldAction(_ sender: Any) {
         self.view.endEditing(true)
-        let input = Double(textBox.text!)
-        numbers.append(input!)
+        let input = String(textBox.text!)
         if(textBox.text != "") {
-            updateChart()
+            fetchNewKeywordTrend(keyword: input)
         }
     }
     
-    func updateChart() {
+    func fetchNewKeywordTrend(keyword: String) {
+        let googleTrendsURL = "http://localhost:5000/google-\(keyword)"
+        AF.request(googleTrendsURL).responseJSON { response in
+            switch response.result {
+            case let .success(value):
+                self.numbers.removeAll()
+                let googleJSON: JSON = JSON(value)
+                for i in 0..<googleJSON.count {
+                    let value: String = googleJSON[i].string!
+                    if let number = Double(value) {
+                        self.numbers.append(number)
+                    }
+                }
+                self.updateChart(keyword: keyword)
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    func updateChart(keyword: String) {
         
         var lineChartPoints  = [ChartDataEntry]()
         
@@ -49,7 +91,7 @@ class TrendingViewController: UIViewController, UITextFieldDelegate {
             lineChartPoints.append(value)
         }
         
-        let line = LineChartDataSet(entries: lineChartPoints, label: "Number")
+        let line = LineChartDataSet(entries: lineChartPoints, label: "Trending Chart for \(keyword)")
         line.colors = [UIColor.systemBlue]
         line.circleColors = [UIColor.systemBlue]
         line.circleHoleColor = UIColor.systemBlue
