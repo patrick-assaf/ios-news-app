@@ -9,6 +9,8 @@
 import UIKit
 
 class BookmarksViewController: UIViewController {
+    
+    var bookmarkedArticles: [Article] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

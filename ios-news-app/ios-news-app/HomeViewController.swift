@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     var homeArticles: [Article] = []
     var articleID: String = ""
+    var bookmarkedArticles: [Article] = []
     var refreshControl = UIRefreshControl()
 
     let locationManager = CLLocationManager()
