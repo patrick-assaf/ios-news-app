@@ -17,8 +17,9 @@ class Article {
     var imageURL: String = ""
     var description: String = ""
     var bookmarked: Bool = false
+    var url: String = ""
     
-    init(key: String, id: String, title: String, date: String, section: String, imageURL: String, description: String, bookmarked: Bool = false) {
+    init(key: String, id: String, title: String, date: String, section: String, imageURL: String, description: String, bookmarked: Bool = false, url: String) {
         self.key = key
         self.id = id
         self.title = title
@@ -27,5 +28,6 @@ class Article {
         self.imageURL = imageURL
         self.description = description
         self.bookmarked = bookmarked
+        self.url = url
     }
 }

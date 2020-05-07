@@ -101,8 +101,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
         let index: Int = indexPath.row
 
         let share = UIAction(title: "Share with Twitter", image: UIImage(named: "twitter")) {_ in
-            print("sharing" + self.homeArticles[index].id)
+            let text = "Check out this Article!"
+            let shareURL = "https://twitter.com/intent/tweet?text=\(text)&url=\(self.homeArticles[index].url)&hashtags=CSCI_571_NewsApp"
+            let escapedURL = shareURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+            UIApplication.shared.open(URL(string: escapedURL)!)
         }
+        
         let bookmark = UIAction(title: "Bookmark", image: UIImage(systemName: "bookmark")) {_ in
             print("bookmarking" + self.homeArticles[index].id)
         }
@@ -161,7 +165,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     let date: String = article["date"].string!
                     let section: String = article["section"].string!
                     let img: String = article["img"].string!
-                    self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section, imageURL: img, description: ""))
+                    let url: String = article["url"].string!
+                    self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section, imageURL: img, description: "", url: url))
                 }
                 self.homeArticlesTable.reloadData()
             case let .failure(error):
@@ -193,7 +198,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
                     let date: String = article["date"].string!
                     let section: String = article["section"].string!
                     let img: String = article["img"].string!
-                    self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section,  imageURL: img, description: ""))
+                    let url: String = article["url"].string!
+                    self.homeArticles.append(Article(key: key, id: id, title: title, date: date, section: section,  imageURL: img, description: "", url: url))
                 }
                 self.homeArticlesTable.reloadData()
                 self.refreshControl.endRefreshing()
