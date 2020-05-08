@@ -187,7 +187,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     
     override func viewWillAppear(_ animated: Bool) {
         
-        let guardianURL = "http://localhost:5000/guardian-home"
+        let guardianURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/guardian-home"
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):
@@ -220,7 +220,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        let guardianURL = "http://localhost:5000/guardian-home"
+        let guardianURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/guardian-home"
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):

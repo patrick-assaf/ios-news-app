@@ -25,7 +25,7 @@ class TrendingViewController: UIViewController, UITextFieldDelegate {
         
         SwiftSpinner.show(duration: 3.0, title:"Loading Trending Page...")
         
-        let googleTrendsURL = "http://localhost:5000/google-coronavirus"
+        let googleTrendsURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/google-coronavirus"
         AF.request(googleTrendsURL).responseJSON { response in
             switch response.result {
             case let .success(value):
@@ -63,7 +63,7 @@ class TrendingViewController: UIViewController, UITextFieldDelegate {
     }
     
     func fetchNewKeywordTrend(keyword: String) {
-        let googleTrendsURL = "http://localhost:5000/google-\(keyword)"
+        let googleTrendsURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/google-\(keyword)"
         AF.request(googleTrendsURL).responseJSON { response in
             switch response.result {
             case let .success(value):

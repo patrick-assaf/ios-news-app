@@ -136,7 +136,7 @@ class Science: UITableViewController, IndicatorInfoProvider {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        let guardianURL = "http://localhost:5000/guardian-science"
+        let guardianURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/guardian-science"
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):
@@ -169,7 +169,7 @@ class Science: UITableViewController, IndicatorInfoProvider {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        let guardianURL = "http://localhost:5000/guardian-science"
+        let guardianURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/guardian-science"
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):

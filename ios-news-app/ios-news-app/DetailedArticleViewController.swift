@@ -65,7 +65,7 @@ class DetailedArticleViewController: UIViewController {
         
         SwiftSpinner.show(duration: 3.0, title:"Loading Detailed Article...")
         
-        let guardianURL = "http://localhost:5000/guardian-\(article.id.replacingOccurrences(of: "/", with: "~"))"
+        let guardianURL = "http://assafp-nodejs.us-east-1.elasticbeanstalk.com/guardian-\(article.id.replacingOccurrences(of: "/", with: "~"))"
         AF.request(guardianURL).responseJSON { response in
             switch response.result {
             case let .success(value):
