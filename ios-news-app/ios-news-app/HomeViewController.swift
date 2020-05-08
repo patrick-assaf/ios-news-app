@@ -30,6 +30,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, UISearchB
     @IBOutlet weak var homeArticlesTable: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        self.searchBar.endEditing(true)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last!
         let geoCoder = CLGeocoder()
