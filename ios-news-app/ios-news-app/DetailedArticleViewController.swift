@@ -52,7 +52,7 @@ class DetailedArticleViewController: UIViewController {
     
     @IBAction func shareOnTwitter(_ sender: Any) {
         let text = "Check out this Article!"
-        let shareURL = "https://twitter.com/intent/tweet?text=\(text)&url=\(articleURL)&hashtags=CSCI_571_NewsApp"
+        let shareURL = "https://twitter.com/intent/tweet?text=\(text)&url=\(articleURL)&hashtags=News"
         let escapedURL = shareURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         UIApplication.shared.open(URL(string: escapedURL)!)
     }

@@ -75,7 +75,7 @@ class Technology: UITableViewController, IndicatorInfoProvider {
 
         let share = UIAction(title: "Share with Twitter", image: UIImage(named: "twitter")) {_ in
             let text = "Check out this Article!"
-            let shareURL = "https://twitter.com/intent/tweet?text=\(text)&url=\(self.technologyArticles[index].url)&hashtags=CSCI_571_NewsApp"
+            let shareURL = "https://twitter.com/intent/tweet?text=\(text)&url=\(self.technologyArticles[index].url)&hashtags=News"
             let escapedURL = shareURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
             UIApplication.shared.open(URL(string: escapedURL)!)
         }
